@@ -1,0 +1,45 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+#  kunga-basics — Docker Compose
+#
+#  Service:
+#    kunga-basics — public marketing/legal site served by nginx (internal port 8080)
+#
+#  The container listens on host port 8081.
+#  The host nginx reverse-proxies port 80/443 (portal.kungabasics.com) → 127.0.0.1:8081.
+#
+#  Prerequisites:
+#    kunga-api must be running first (it owns the "kunga-network" network).
+#    cd ../kunga-api && docker compose up -d
+#
+#  Usage:
+#    docker compose up --build -d   # build & start
+#    docker compose logs -f         # tail logs
+#    docker compose down            # stop & remove containers
+# ═══════════════════════════════════════════════════════════════════════════════
+
+services:
+
+  kunga-basics:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        VITE_API_URL: ${VITE_API_URL:-/api/v1}
+    image: kunga-basics:latest
+    container_name: kunga-basics
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8081:80"   # bind to localhost only — host nginx proxies in
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+    networks:
+      - kunga-network
+
+networks:
+  kunga-network:
+    external: true          # created by kunga-api's docker-compose
+    name: kunga-network
