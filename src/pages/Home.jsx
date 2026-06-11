@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import {
   Heart,
   Clock,
@@ -11,16 +12,24 @@ import {
   Globe,
   CreditCard,
   Bell,
-  CheckCircle2,
-  Smartphone,
-  Globe2,
   PlayCircle,
   Star,
+  ChevronLeft,
+  ChevronRight,
+  Download,
 } from "lucide-react";
 import { trackEvent } from "../lib/track.js";
 import DownloadSection from "../components/DownloadSection.jsx";
 import Reveal from "../components/Reveal.jsx";
 import StatCounter from "../components/StatCounter.jsx";
+
+const API_BASE = import.meta.env.VITE_API_URL ?? "/api/v1";
+
+const DEFAULT_STATS = {
+  familiesSupported: 10000,
+  caregiverSatisfaction: 95,
+  languagesSupported: 4,
+};
 
 const BENEFITS = [
   {
@@ -98,16 +107,79 @@ const TESTIMONIALS = [
   },
 ];
 
+const APP_PREVIEWS = [
+  { label: "Splash Screen", img: "/images/img-02.png" },
+  { label: "Daily Routines", img: "/images/img-03.png" },
+  { label: "Milestone Tracking", img: "/images/img-04.png" },
+  { label: "Ask Dr. Gad", img: "/images/img-06.png" },
+  { label: "Family Profiles", img: "/images/img-07.png" },
+  { label: "Journal", img: "/images/img-08.png" },
+];
+
 export default function Home() {
+  const previewRef = useRef(null);
+  const [activePreview, setActivePreview] = useState(0);
+  const [stats, setStats] = useState(DEFAULT_STATS);
+
+  useEffect(() => {
+    let cancelled = false;
+    fetch(`${API_BASE}/analytics/site/public-stats`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data || cancelled) return;
+        setStats((prev) => ({
+          familiesSupported: data.familiesSupported || prev.familiesSupported,
+          caregiverSatisfaction: data.caregiverSatisfaction ?? prev.caregiverSatisfaction,
+          languagesSupported: data.languagesSupported ?? prev.languagesSupported,
+        }));
+      })
+      .catch(() => { /* keep defaults — best-effort */ });
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    const el = previewRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const card = el.querySelector(".preview-card");
+      const step = card ? card.offsetWidth + 20 : el.clientWidth;
+      setActivePreview(Math.round(el.scrollLeft / step));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
+
+  const scrollPreview = (dir) => {
+    const el = previewRef.current;
+    if (!el) return;
+    const card = el.querySelector(".preview-card");
+    const step = card ? card.offsetWidth + 20 : el.clientWidth;
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
+
+  const scrollToPreview = (index) => {
+    const el = previewRef.current;
+    if (!el) return;
+    const card = el.querySelector(".preview-card");
+    const step = card ? card.offsetWidth + 20 : el.clientWidth;
+    el.scrollTo({ left: index * step, behavior: "smooth" });
+  };
+
   return (
     <>
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="hero imigongo-bg imigongo-hero">
         <div className="container hero-grid">
           <div className="hero-copy">
-            <span className="eyebrow">
-              <Sparkles size={14} /> Built for caregivers, by experts
-            </span>
+            <a
+              className="eyebrow"
+              href="/features"
+              onClick={() => trackEvent("click", "/", "hero_badge")}
+            >
+              <span className="badge-tag">New</span>
+              Progress tracking &amp; Ask Dr. Gad now live
+              <ChevronRight size={14} />
+            </a>
             <h1>
               Helping Every Child Reach Their{" "}
               <span className="accent">Full Potential</span>
@@ -122,10 +194,10 @@ export default function Home() {
                 href="#download"
                 onClick={() => trackEvent("click", "/", "hero_get_started")}
               >
-                Get Started
+                <Sparkles size={18} /> Get Started
               </a>
               <a
-                className="btn btn-outline"
+                className="btn btn-dark-outline"
                 href="/features"
                 onClick={() => trackEvent("click", "/", "hero_watch_demo")}
               >
@@ -133,16 +205,28 @@ export default function Home() {
               </a>
             </div>
             <div className="trust-row">
-              <span className="trust-item"><CheckCircle2 size={16} /> Trusted by families</span>
-              <span className="trust-item"><Smartphone size={16} /> Available on iOS &amp; Android</span>
-              <span className="trust-item"><Globe2 size={16} /> Multi-language support</span>
+              <div className="avatar-stack">
+                <span>A</span>
+                <span>B</span>
+                <span>C</span>
+                <span>D</span>
+                <span>E</span>
+              </div>
+              <div className="trust-info">
+                <div className="stars">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <Star key={idx} size={14} fill="currentColor" />
+                  ))}
+                </div>
+                <p>Trusted by <strong>10,000+ families</strong> across Africa</p>
+              </div>
             </div>
           </div>
 
           <div className="hero-visual">
             <div className="phone-frame">
               <div className="phone-screen">
-                <img src="/icon.png" alt="Kunga Basics app preview" />
+                <img src="/images/img-01.png" alt="Kunga Basics app preview" />
               </div>
             </div>
             <div className="float-card card-1">
@@ -188,11 +272,41 @@ export default function Home() {
             </p>
           </Reveal>
           <Reveal>
-            <div className="app-preview">
-              {["Daily Routines", "Milestone Tracking", "Ask Dr. Gad", "Family Profiles", "Journal"].map((label) => (
-                <div className="preview-card" key={label}>
-                  <div className="placeholder">{label}</div>
-                </div>
+            <div className="app-preview-wrap">
+              <button
+                className="app-preview-arrow prev"
+                aria-label="Previous screenshot"
+                onClick={() => scrollPreview(-1)}
+              >
+                <ChevronLeft size={20} />
+              </button>
+              <div className="app-preview" ref={previewRef}>
+                {APP_PREVIEWS.map(({ label, img }) => (
+                  <div className="preview-card" key={label}>
+                    {img ? (
+                      <img src={img} alt={label} />
+                    ) : (
+                      <div className="placeholder">{label}</div>
+                    )}
+                  </div>
+                ))}
+              </div>
+              <button
+                className="app-preview-arrow next"
+                aria-label="Next screenshot"
+                onClick={() => scrollPreview(1)}
+              >
+                <ChevronRight size={20} />
+              </button>
+            </div>
+            <div className="app-preview-dots">
+              {APP_PREVIEWS.map(({ label }, i) => (
+                <button
+                  key={label}
+                  className={`app-preview-dot${i === activePreview ? " active" : ""}`}
+                  aria-label={`Go to ${label}`}
+                  onClick={() => scrollToPreview(i)}
+                />
               ))}
             </div>
           </Reveal>
@@ -238,13 +352,35 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── Mid-page CTA ─────────────────────────────────────────────────── */}
+      <section className="mid-cta imigongo-bg imigongo-hero">
+        <div className="container mid-cta-inner">
+          <Reveal as="div">
+            <h2>Ready to support your child's growth?</h2>
+            <p>
+              Download Kunga Basics today — free for every family, with expert
+              guidance always within reach.
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <a
+              className="btn btn-primary"
+              href="#download"
+              onClick={() => trackEvent("click", "/", "mid_cta_download")}
+            >
+              <Download size={18} /> Download the App
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
       {/* ── Stats / Social proof ─────────────────────────────────────────── */}
-      <section className="stats-section">
+      <section className="stats-section imigongo-bg imigongo-hero">
         <div className="container">
           <div className="stats-grid">
-            <StatCounter value={10000} suffix="+" label="Families Supported" />
-            <StatCounter value={95} suffix="%" label="Caregiver Satisfaction" />
-            <StatCounter value={4} suffix=" Languages" label="Supported in App" />
+            <StatCounter value={stats.familiesSupported} suffix="+" label="Families Supported" />
+            <StatCounter value={stats.caregiverSatisfaction} suffix="%" label="Caregiver Satisfaction" />
+            <StatCounter value={stats.languagesSupported} suffix=" Languages" label="Supported in App" />
             <StatCounter value={24} suffix="/7" label="Access to Guidance" />
           </div>
         </div>

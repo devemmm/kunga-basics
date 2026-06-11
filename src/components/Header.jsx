@@ -1,19 +1,35 @@
 import { useEffect, useState } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
-import { trackEvent } from "../lib/track.js";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const isHome = location.pathname === "/";
 
   // Close the mobile menu whenever the route changes.
   useEffect(() => {
     setOpen(false);
   }, [location.pathname]);
 
+  // On the home page, the header starts transparent over the dark hero
+  // and switches to a solid background once the user scrolls past it.
+  useEffect(() => {
+    if (!isHome) {
+      setScrolled(false);
+      return;
+    }
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
+
+  const dark = isHome && !scrolled && !open;
+
   return (
-    <header className="site-header">
+    <header className={`site-header${dark ? " site-header--dark" : ""}`}>
       <div className="container">
         <NavLink to="/" className="brand" onClick={() => setOpen(false)}>
           <img src="/icon.png" alt="Kunga Basics" className="logo" />
@@ -37,15 +53,6 @@ export default function Header() {
           <NavLink to="/location" onClick={() => setOpen(false)}>Location</NavLink>
           <NavLink to="/privacy" onClick={() => setOpen(false)}>Privacy</NavLink>
           <NavLink to="/terms" onClick={() => setOpen(false)}>Terms</NavLink>
-          <a
-            href="https://admin.kungabasics.com"
-            onClick={() => {
-              setOpen(false);
-              trackEvent("click", "/", "header_admin_login");
-            }}
-          >
-            Admin Login
-          </a>
         </nav>
       </div>
     </header>
