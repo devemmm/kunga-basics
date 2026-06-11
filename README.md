@@ -41,3 +41,18 @@ Runs nginx on `127.0.0.1:8081`. Add a host nginx reverse-proxy block for
 - `/support` — Support, FAQ, contact info
 - `/privacy` — Privacy Policy
 - `/terms` — Terms of Service
+
+## SEO
+
+Each page renders a `<Seo>` component (`src/components/Seo.jsx`, via
+react-helmet-async) that sets the title, meta description, canonical URL,
+and Open Graph / Twitter card tags. Pages also embed JSON-LD structured
+data where relevant:
+
+- Home — `Organization` + `MobileApplication`
+- Support — `FAQPage` (covers both the parent-focused topics and the
+  app/account FAQs)
+
+`public/sitemap.xml` and `public/robots.txt` list the canonical pages above
+under the `kungabasics.com` domain — update both if routes are added,
+removed, or renamed.
