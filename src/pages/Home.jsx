@@ -22,6 +22,7 @@ import { trackEvent } from "../lib/track.js";
 import DownloadSection from "../components/DownloadSection.jsx";
 import Reveal from "../components/Reveal.jsx";
 import StatCounter from "../components/StatCounter.jsx";
+import Seo from "../components/Seo.jsx";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "/api/v1";
 
@@ -167,6 +168,36 @@ export default function Home() {
 
   return (
     <>
+      <Seo
+        title="Kunga Basics — Autism, Speech Delay & ADHD Support App for Children"
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "Organization",
+              name: "Kunga Basics",
+              url: "https://kungabasics.com",
+              logo: "https://kungabasics.com/icon.png",
+              email: "info@kungabasics.com",
+              sameAs: [],
+            },
+            {
+              "@type": "MobileApplication",
+              name: "Kunga Basics",
+              applicationCategory: "HealthApplication",
+              operatingSystem: "iOS, Android",
+              description:
+                "Kunga Basics helps parents and caregivers support children with Autism, Speech Delay, ADHD, Down Syndrome, Cerebral Palsy, and other developmental challenges through guided daily routines, expert video modules, milestone tracking, and Ask Dr. Gad.",
+              offers: {
+                "@type": "Offer",
+                price: "14.00",
+                priceCurrency: "USD",
+              },
+            },
+          ],
+        }}
+      />
+
       {/* ── Hero ─────────────────────────────────────────────────────── */}
       <section className="hero imigongo-bg imigongo-hero">
         <div className="container hero-grid">
@@ -187,6 +218,11 @@ export default function Home() {
             <p>
               Expert guidance, developmental tracking, and personalized support
               for caregivers — all in one app.
+            </p>
+            <p className="conditions-line">
+              Supporting children with <strong>Autism</strong>, <strong>Speech Delay</strong>,{" "}
+              <strong>ADHD</strong>, <strong>Down Syndrome</strong>,{" "}
+              <strong>Cerebral Palsy</strong>, and other developmental challenges.
             </p>
             <div className="actions">
               <a
@@ -226,7 +262,10 @@ export default function Home() {
           <div className="hero-visual">
             <div className="phone-frame">
               <div className="phone-screen">
-                <img src="/images/img-01.png" alt="Kunga Basics app preview" />
+                <img
+                  src="/images/img-01.png"
+                  alt="Kunga Basics app home screen — daily routines and milestone tracking for children with Autism, ADHD and Speech Delay"
+                />
               </div>
             </div>
             <div className="float-card card-1">
@@ -284,7 +323,7 @@ export default function Home() {
                 {APP_PREVIEWS.map(({ label, img }) => (
                   <div className="preview-card" key={label}>
                     {img ? (
-                      <img src={img} alt={label} />
+                      <img src={img} alt={`Kunga Basics app — ${label} screen`} />
                     ) : (
                       <div className="placeholder">{label}</div>
                     )}

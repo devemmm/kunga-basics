@@ -1,6 +1,12 @@
+import Seo from "../components/Seo.jsx";
+
 export default function About() {
   return (
     <section className="section">
+      <Seo
+        title="About Us — Kunga Therapy & Dr. Gad | Kunga Basics"
+        description="Learn about Kunga Basics (Kunga Therapy) — our mission to support families of children with Autism, Speech Delay, ADHD, Down Syndrome, Cerebral Palsy and other developmental challenges, with expert guidance from Dr. Gad."
+      />
       <div className="container" style={{ maxWidth: 760 }}>
         <h2 className="section-ttl">About Kunga Basics</h2>
         <p className="section-sub" style={{ maxWidth: "none" }}>

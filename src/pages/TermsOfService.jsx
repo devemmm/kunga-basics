@@ -1,3 +1,5 @@
+import Seo from "../components/Seo.jsx";
+
 const SECTIONS = [
   {
     title: "1. Acceptance of Terms",
@@ -75,7 +77,7 @@ You may delete your account at any time from Settings. Upon deletion, your perso
     body: `For questions about these terms, contact us at:
 
 📧 legal@kungabasics.com
-🌐 https://portal.kungabasics.com
+🌐 https://kungabasics.com
 
 Kunga Basics Ltd. · Kigali, Rwanda`,
   },
@@ -84,6 +86,7 @@ Kunga Basics Ltd. · Kigali, Rwanda`,
 export default function TermsOfService() {
   return (
     <section className="legal-page">
+      <Seo title="Terms of Service | Kunga Basics" />
       <div className="container" style={{ maxWidth: 760 }}>
         <h1>Terms of Service</h1>
         <div className="updated">Last updated: June 2026</div>

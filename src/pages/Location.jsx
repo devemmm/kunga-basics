@@ -1,5 +1,6 @@
 import { MapPin, Mail, Clock } from "lucide-react";
 import { trackEvent } from "../lib/track.js";
+import Seo from "../components/Seo.jsx";
 
 const MAPS_QUERY = "Kigali, Rwanda";
 const MAPS_EMBED_SRC = `https://maps.google.com/maps?q=${encodeURIComponent(MAPS_QUERY)}&z=12&output=embed`;
@@ -8,6 +9,10 @@ const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURICo
 export default function Location() {
   return (
     <section className="legal-page">
+      <Seo
+        title="Our Location — Autism Therapy Support in Kigali, Rwanda | Kunga Basics"
+        description="Kunga Basics is based in Kigali, Rwanda, supporting families across the region with autism therapy resources, developmental guidance, and the Kunga Basics app."
+      />
       <div className="container" style={{ maxWidth: 760 }}>
         <h1>Our Location</h1>
         <p className="intro">

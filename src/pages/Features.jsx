@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { trackEvent } from "../lib/track.js";
 import DownloadSection from "../components/DownloadSection.jsx";
+import Seo from "../components/Seo.jsx";
 
 const GROUPS = [
   {
@@ -110,6 +111,11 @@ const GROUPS = [
 export default function Features() {
   return (
     <>
+      <Seo
+        title="App Features — Autism Activities, Speech & ADHD Support | Kunga Basics"
+        description="Explore Kunga Basics features: expert video modules for Autism, Speech Delay, ADHD and Cerebral Palsy, daily routine tracking, milestone reports, journals, and Ask Dr. Gad for personalised guidance."
+      />
+
       <section className="hero imigongo-bg imigongo-hero" style={{ paddingBottom: 40 }}>
         <div className="container">
           <h1>Everything the Kunga Basics app can do.</h1>

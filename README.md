@@ -31,7 +31,7 @@ docker compose up --build -d
 ```
 
 Runs nginx on `127.0.0.1:8081`. Add a host nginx reverse-proxy block for
-`portal.kungabasics.com` → `127.0.0.1:8081`, similar to the
+`kungabasics.com` → `127.0.0.1:8081`, similar to the
 `admin.kungabasics.com` setup documented in `kunga-admin-portal/README.md`.
 
 ## Pages

@@ -1,3 +1,5 @@
+import Seo from "../components/Seo.jsx";
+
 const SECTIONS = [
   {
     title: "1. Information We Collect",
@@ -70,7 +72,7 @@ You can manage cookie preferences for the mobile app in Settings → Cookie Pref
     body: `For privacy-related questions or to exercise your rights, contact us at:
 
 📧 privacy@kungabasics.com
-🌐 https://portal.kungabasics.com
+🌐 https://kungabasics.com
 
 We will respond within 30 days as required by GDPR.`,
   },
@@ -79,6 +81,7 @@ We will respond within 30 days as required by GDPR.`,
 export default function PrivacyPolicy() {
   return (
     <section className="legal-page">
+      <Seo title="Privacy Policy | Kunga Basics" />
       <div className="container" style={{ maxWidth: 760 }}>
         <h1>Privacy Policy</h1>
         <div className="updated">Last updated: June 2026</div>

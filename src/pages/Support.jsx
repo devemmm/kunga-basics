@@ -1,7 +1,20 @@
 import { Mail, LifeBuoy, MessageSquare } from "lucide-react";
 import { trackEvent } from "../lib/track.js";
+import Seo from "../components/Seo.jsx";
 
 const FAQS = [
+  {
+    q: "My child is not talking yet — how can Kunga Basics help?",
+    a: "Speech delays are common, and Kunga Basics offers video modules on speech & communication development plus daily routines you can use at home to encourage talking. If you're concerned about your child's speech, you can also ask Dr. Gad directly through the app for personalised guidance — though we always recommend speaking with a qualified speech-language professional for an evaluation.",
+  },
+  {
+    q: "My child doesn't respond to their name — is this related to Autism?",
+    a: "Not responding to their name can be one of many early signs caregivers notice, but it isn't a diagnosis on its own. Kunga Basics' Autism-focused modules can help you understand common developmental signs and daily strategies, and Ask Dr. Gad lets you raise specific concerns. For a formal assessment, please consult a paediatrician or developmental specialist.",
+  },
+  {
+    q: "How can I help my autistic child at home?",
+    a: "Kunga Basics provides structured daily routines, milestone tracking, and expert video modules designed for caregivers of children with Autism — covering communication, sensory needs, and everyday activities you can build into your family's schedule. The Ask Dr. Gad feature also lets you get personalised, judgment-free advice for your child's specific situation.",
+  },
   {
     q: "How do I create an account?",
     a: "Download the Kunga Basics app from the Play Store or App Store, then tap \"Sign Up\" and follow the steps to create your account and set up your child's profile.",
@@ -27,6 +40,22 @@ const FAQS = [
 export default function Support() {
   return (
     <section className="legal-page">
+      <Seo
+        title="Support & Help — Autism Parent Support | Kunga Basics"
+        description="Get help with Kunga Basics: account setup, subscriptions, and frequently asked questions. Find resources for early intervention, special needs parenting, and home therapy activities for children with Autism, Speech Delay, and ADHD."
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQS.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: f.a,
+            },
+          })),
+        }}
+      />
       <div className="container" style={{ maxWidth: 760 }}>
         <h1>Support</h1>
         <p className="intro">
