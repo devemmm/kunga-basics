@@ -128,7 +128,7 @@ export default function ResetPassword() {
                 Your password has been changed successfully. You can now go back to the Kunga Basics app and sign in with your new password.
               </div>
               <a
-                href="rw.devemm.kunga.basics://login"
+                href="https://kungabasics.com/app/login"
                 style={{
                   display: "inline-block", width: "100%", padding: "13px 0", borderRadius: 12,
                   background: "var(--gradient-primary)", color: "#fff", fontFamily: "var(--fb)",
