@@ -124,8 +124,22 @@ export default function ResetPassword() {
               <div style={{ fontFamily: "var(--fd)", fontWeight: 900, fontSize: 20, color: "var(--ink)", marginBottom: 10 }}>
                 Password updated!
               </div>
-              <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.6 }}>
+              <div style={{ fontSize: 13, color: "var(--muted)", lineHeight: 1.6, marginBottom: 22 }}>
                 Your password has been changed successfully. You can now go back to the Kunga Basics app and sign in with your new password.
+              </div>
+              <a
+                href="rw.devemm.kunga.basics://login"
+                style={{
+                  display: "inline-block", width: "100%", padding: "13px 0", borderRadius: 12,
+                  background: "var(--gradient-primary)", color: "#fff", fontFamily: "var(--fb)",
+                  fontSize: 15, fontWeight: 700, textDecoration: "none",
+                  boxShadow: "0 4px 18px rgba(22,163,74,.3)", boxSizing: "border-box",
+                }}
+              >
+                Open Kunga Basics app
+              </a>
+              <div style={{ fontSize: 12, color: "var(--muted)", marginTop: 10 }}>
+                If nothing happens, open the Kunga Basics app manually and sign in.
               </div>
             </div>
           ) : (
