@@ -3,7 +3,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "rw.devemm.kunga.basics",
+      "package_name": "com.kungabasics.app",
       "sha256_cert_fingerprints": [
         "FILL_IN_ANDROID_SHA256_CERT_FINGERPRINT"
       ]

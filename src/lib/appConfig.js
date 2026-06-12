@@ -7,7 +7,7 @@
 const BASE = import.meta.env.VITE_API_URL ?? '/api/v1';
 
 export const FALLBACK_IOS_URL     = "https://apps.apple.com/app/kunga-basics/id000000000";
-export const FALLBACK_ANDROID_URL = "https://play.google.com/store/apps/details?id=rw.devemm.kunga.basics";
+export const FALLBACK_ANDROID_URL = "https://play.google.com/store/apps/details?id=com.kungabasics.app";
 
 /**
  * Fetch the current App Store / Play Store URLs from the API.
