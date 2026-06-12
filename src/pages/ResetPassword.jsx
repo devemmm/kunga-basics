@@ -82,25 +82,25 @@ export default function ResetPassword() {
   return (
     <>
       <Seo title="Reset your password — Kunga Basics" description="Set a new password for your Kunga Basics account." />
-      <div style={{
+      <div className="reset-shell" style={{
         minHeight: "100vh", display: "flex",
         fontFamily: "var(--fb)",
       }}>
-        {/* Brand panel — hidden on small screens */}
+        {/* Brand panel — becomes a top hero strip on small screens */}
         <div className="reset-brand-panel" style={{
           flex: "0 0 42%", display: "flex", flexDirection: "column",
-          justifyContent: "space-between",
+          justifyContent: "space-between", gap: 28,
           padding: "44px 48px",
           background: "linear-gradient(155deg, #0d3b36 0%, #134e3f 45%, var(--green) 100%)",
           backgroundImage: "var(--pattern-hero), linear-gradient(155deg, #0d3b36 0%, #134e3f 45%, var(--green) 100%)",
           backgroundSize: "var(--pattern-hero-size), cover",
           color: "#fff", position: "relative", overflow: "hidden",
         }}>
-          <div style={{
+          <div className="reset-brand-orb" style={{
             position: "absolute", top: -120, right: -120, width: 320, height: 320,
             borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,.14), transparent 70%)",
           }} />
-          <div style={{
+          <div className="reset-brand-orb" style={{
             position: "absolute", bottom: -140, left: -100, width: 360, height: 360,
             borderRadius: "50%", background: "radial-gradient(circle, rgba(255,255,255,.08), transparent 70%)",
           }} />
@@ -118,8 +118,8 @@ export default function ResetPassword() {
             </span>
           </a>
 
-          <div style={{ position: "relative", zIndex: 1, maxWidth: 360 }}>
-            <div style={{
+          <div className="reset-brand-copy" style={{ position: "relative", zIndex: 1, maxWidth: 360 }}>
+            <div className="reset-brand-badge" style={{
               display: "inline-flex", alignItems: "center", gap: 6,
               background: "rgba(255,255,255,.12)", borderRadius: 999,
               padding: "6px 12px", fontSize: 11.5, fontWeight: 700,
@@ -127,16 +127,16 @@ export default function ResetPassword() {
             }}>
               <ShieldCheck size={14} /> Account security
             </div>
-            <div style={{ fontFamily: "var(--fd)", fontWeight: 900, fontSize: 30, lineHeight: 1.25, marginBottom: 12 }}>
+            <div className="reset-brand-headline" style={{ fontFamily: "var(--fd)", fontWeight: 900, fontSize: 30, lineHeight: 1.25, marginBottom: 12 }}>
               Let's get you a fresh password
             </div>
-            <div style={{ fontSize: 14.5, lineHeight: 1.7, color: "rgba(255,255,255,.85)" }}>
+            <div className="reset-brand-desc" style={{ fontSize: 14.5, lineHeight: 1.7, color: "rgba(255,255,255,.85)" }}>
               Choose something strong and memorable — you'll use it to sign back
               into the Kunga Basics app on your child's device.
             </div>
           </div>
 
-          <div style={{ position: "relative", zIndex: 1, fontSize: 12.5, color: "rgba(255,255,255,.65)" }}>
+          <div className="reset-brand-footer" style={{ position: "relative", zIndex: 1, fontSize: 12.5, color: "rgba(255,255,255,.65)" }}>
             © {new Date().getFullYear()} Kunga Basics. All rights reserved.
           </div>
         </div>
@@ -147,20 +147,6 @@ export default function ResetPassword() {
           padding: "32px 16px", background: "var(--surface)",
         }}>
           <div style={{ width: "100%", maxWidth: 420 }}>
-            {/* Mobile-only brand header */}
-            <div className="reset-mobile-brand" style={{ display: "none", textAlign: "center", marginBottom: 28 }}>
-              <div style={{
-                width: 56, height: 56, borderRadius: 18, margin: "0 auto 14px",
-                background: "#fff", padding: 8, display: "flex",
-                alignItems: "center", justifyContent: "center",
-                boxShadow: "0 8px 32px rgba(22,163,74,.25)",
-              }}>
-                <img src="/icon.png" style={{ width: 38, height: 38, objectFit: "contain" }} alt="Kunga Basics" />
-              </div>
-              <div style={{ fontFamily: "var(--fd)", fontWeight: 900, fontSize: 20, color: "var(--ink)", letterSpacing: "-.3px" }}>
-                Kunga Basics
-              </div>
-            </div>
 
             <div style={{
               background: "#fff", borderRadius: 24, padding: "40px 36px",
@@ -341,8 +327,18 @@ export default function ResetPassword() {
 
         <style>{`
           @media (max-width: 880px) {
-            .reset-brand-panel { display: none !important; }
-            .reset-mobile-brand { display: block !important; }
+            .reset-shell { flex-direction: column; }
+            .reset-brand-panel {
+              flex: 0 0 auto !important;
+              padding: 28px 24px !important;
+              gap: 16px !important;
+            }
+            .reset-brand-orb { display: none; }
+            .reset-brand-copy { max-width: 100% !important; }
+            .reset-brand-headline { font-size: 22px !important; margin-bottom: 8px !important; }
+            .reset-brand-desc { display: none; }
+            .reset-brand-badge { margin-bottom: 0 !important; }
+            .reset-brand-footer { display: none !important; }
           }
         `}</style>
       </div>
