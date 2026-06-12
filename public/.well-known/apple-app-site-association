@@ -3,7 +3,7 @@
     "apps": [],
     "details": [
       {
-        "appID": "FILL_IN_APPLE_TEAM_ID.com.kungabasics.app",
+        "appID": "8R662M933S.com.kungabasics.app",
         "paths": ["/app/*"]
       }
     ]
