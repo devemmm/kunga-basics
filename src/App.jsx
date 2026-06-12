@@ -25,12 +25,20 @@ function usePageTracking() {
   }, [location.pathname]);
 }
 
+// Standalone auth/deep-link screens render full-bleed, without the
+// marketing site's header and footer.
+const STANDALONE_ROUTES = ["/reset-password", "/app"];
+
 export default function App() {
   usePageTracking();
+  const location = useLocation();
+  const isStandalone = STANDALONE_ROUTES.some(
+    (path) => location.pathname === path || location.pathname.startsWith(`${path}/`)
+  );
 
   return (
     <div className="shell">
-      <Header />
+      {!isStandalone && <Header />}
       <main style={{ flex: 1 }}>
         <Routes>
           <Route path="/" element={<Home />} />
@@ -45,7 +53,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer />
+      {!isStandalone && <Footer />}
     </div>
   );
 }
