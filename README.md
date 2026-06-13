@@ -8,6 +8,16 @@ pageview/event beacons to `POST /api/v1/analytics/track` with
 `source: 'portal'` — feeding the "Visitor Analytics" dashboard in
 kunga-admin-portal.
 
+## Branching Strategy
+
+| Branch | Purpose |
+|--------|---------|
+| `dev` | Active development. All new work is merged here first. |
+| `staging` | Pre-production verification. Promote from `dev` when ready for QA. |
+| `prod` | Production. Promote from `staging` after sign-off; this is what's deployed to `kungabasics.com`. |
+
+Workflow: `dev` → `staging` → `prod`. Open PRs against `dev`; promote via merge/fast-forward to `staging` and `prod` once verified.
+
 ## Local development
 
 ```bash
