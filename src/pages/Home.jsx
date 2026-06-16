@@ -210,78 +210,143 @@ export default function Home() {
         }}
       />
 
-      {/* ── Hero — Kunga Therapy Identity ───────────────────────────────── */}
-      <section className="hero imigongo-bg imigongo-hero kt-hero">
-        <div className="container">
-          <Reveal as="div" className="kt-hero-inner">
-            <div className="kt-trust-badge">
-              <Users size={14} />
-              Trusted by <strong>10,000+ Families</strong> Worldwide
+      {/* ── Hero — Kunga Therapy Identity (light) ───────────────────────── */}
+      <section className="kt-hero-v2">
+        {/* Top bar */}
+        <div className="kt-v2-topbar container">
+          <div className="kt-v2-brand">
+            <img src="/icon.png" alt="Kunga Therapy" />
+            <div>
+              <span className="kt-v2-brand-name">KUNGA</span>
+              <span className="kt-v2-brand-sub">THERAPY</span>
             </div>
+          </div>
+          <div className="kt-v2-trust">
+            <div className="kt-v2-trust-icon"><Users size={18} /></div>
+            <div>
+              <span className="kt-v2-trust-num">10,000+</span>
+              <span className="kt-v2-trust-label">Families Worldwide</span>
+            </div>
+          </div>
+        </div>
 
-            <p className="kt-eyebrow">A Structured Child Development Program</p>
-            <h1 className="kt-headline">
-              KUNGA <span className="accent">THERAPY</span>
+        {/* Headline */}
+        <div className="container">
+          <Reveal as="div" className="kt-v2-headline-wrap">
+            <h1 className="kt-v2-headline">
+              The Missing Link
             </h1>
-            <p className="kt-tagline">
-              The Missing Link Between Attention, Interaction, Movement, and Communication.
+            <p className="kt-v2-tagline">
+              Between <strong>Attention</strong>, <strong>Interaction</strong>,{" "}
+              <strong>Movement</strong>, and <strong>Communication</strong>.
             </p>
-            <p className="kt-sub">
-              Support Communication. Improve Attention. Build Connection.
-            </p>
-            <p className="kt-desc">
-              A structured child development program designed to strengthen the brain systems
-              that support speech, attention, interaction, coordination, learning, and behavior.
-            </p>
+          </Reveal>
 
-            {/* 4-pillar visual */}
-            <div className="kt-pillars">
-              <div className="kt-pillar kt-pillar--tl">
-                <div className="kt-pillar-icon"><Eye size={22} /></div>
-                <span>Eye Contact</span>
+          {/* Central visual — pillars + photo + SVG arrows */}
+          <Reveal>
+            <div className="kt-v2-visual">
+
+              {/* SVG connecting dashed lines */}
+              <svg className="kt-v2-svg" viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                {/* Center → Attention (top) */}
+                <line x1="250" y1="210" x2="250" y2="80" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
+                {/* Center → Interaction (left) */}
+                <line x1="250" y1="210" x2="80" y2="210" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
+                {/* Center → Communication (right) */}
+                <line x1="250" y1="210" x2="420" y2="210" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
+                {/* Center → Movement (bottom) */}
+                <line x1="250" y1="210" x2="250" y2="345" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
+                <defs>
+                  <marker id="arrowGreen" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
+                    <polygon points="0 0, 7 3.5, 0 7" fill="#16A34A" />
+                  </marker>
+                </defs>
+              </svg>
+
+              {/* Center photo */}
+              <div className="kt-v2-center-photo">
+                <img
+                  src="/images/hero-mother-child.jpg"
+                  alt="Mother engaging with child — Kunga Therapy"
+                />
               </div>
-              <div className="kt-pillar kt-pillar--tr">
-                <div className="kt-pillar-icon"><Brain size={22} /></div>
+
+              {/* Kunga center logo overlay */}
+              <div className="kt-v2-center-logo">
+                <img src="/icon.png" alt="Kunga Therapy" />
+              </div>
+
+              {/* Attention — top */}
+              <div className="kt-v2-node kt-v2-node--top">
+                <div className="kt-v2-node-icon"><Brain size={22} /></div>
                 <span>Attention</span>
               </div>
-              <div className="kt-pillar-center">
-                <div className="kt-pillar-center-inner">
-                  <img src="/icon.png" alt="Kunga Therapy" className="kt-center-logo" />
-                  <p>Strong communication begins with<br /><strong>attention, interaction, and connection.</strong></p>
-                </div>
-              </div>
-              <div className="kt-pillar kt-pillar--bl">
-                <div className="kt-pillar-icon"><Heart size={22} /></div>
+
+              {/* Interaction — left */}
+              <div className="kt-v2-node kt-v2-node--left">
+                <div className="kt-v2-node-icon"><Users size={22} /></div>
                 <span>Interaction</span>
               </div>
-              <div className="kt-pillar kt-pillar--br">
-                <div className="kt-pillar-icon"><MessageCircle size={22} /></div>
+
+              {/* Communication — right */}
+              <div className="kt-v2-node kt-v2-node--right">
+                <div className="kt-v2-node-icon"><MessageCircle size={22} /></div>
                 <span>Communication</span>
               </div>
-            </div>
 
-            <div className="kt-conditions">
-              <span className="kt-conditions-label">Supporting children with:</span>
-              {CONDITIONS.map((c) => (
-                <span key={c} className="kt-condition-tag">{c}</span>
+              {/* Movement — bottom */}
+              <div className="kt-v2-node kt-v2-node--bottom">
+                <div className="kt-v2-node-icon"><Move size={22} /></div>
+                <span>Movement</span>
+              </div>
+            </div>
+          </Reveal>
+
+          {/* Message bar */}
+          <Reveal>
+            <div className="kt-v2-message">
+              <div className="kt-v2-message-icon"><Heart size={20} /></div>
+              <p>
+                Strong communication begins with{" "}
+                <strong>attention, interaction, and connection.</strong>
+              </p>
+            </div>
+          </Reveal>
+
+          {/* 4-feature strip */}
+          <Reveal>
+            <div className="kt-v2-features">
+              {[
+                { icon: Brain, label: "Understand", desc: "the why behind your child's development." },
+                { icon: BookOpen, label: "Learn", desc: "practical strategies you can use at home." },
+                { icon: TrendingUp, label: "Track", desc: "real progress every step of the way." },
+                { icon: Users, label: "Transform", desc: "daily moments into meaningful development." },
+              ].map((f) => (
+                <div className="kt-v2-feature" key={f.label}>
+                  <div className="kt-v2-feature-icon"><f.icon size={28} /></div>
+                  <strong>{f.label}</strong>
+                  <span>{f.desc}</span>
+                </div>
               ))}
             </div>
+          </Reveal>
 
-            <div className="actions" style={{ justifyContent: "center" }}>
+          {/* CTA */}
+          <Reveal delay={60}>
+            <div className="kt-v2-cta-wrap">
               <a
-                className="btn btn-primary"
+                className="btn btn-primary kt-v2-cta"
                 href="#download"
                 onClick={() => trackEvent("click", "/", "hero_start_journey")}
               >
-                Start Your Journey <ArrowRight size={16} />
+                START YOUR JOURNEY <ArrowRight size={18} />
               </a>
-              <a
-                className="btn btn-dark-outline"
-                href="#session"
-                onClick={() => trackEvent("click", "/", "hero_see_session")}
-              >
-                <PlayCircle size={18} /> See Today's Session
-              </a>
+              <div className="kt-v2-dots">
+                <span className="active" />
+                <span />
+                <span />
+                <span />
+              </div>
             </div>
           </Reveal>
         </div>
