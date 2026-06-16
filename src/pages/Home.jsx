@@ -20,7 +20,7 @@ import {
 import { trackEvent } from "../lib/track.js";
 import DownloadSection from "../components/DownloadSection.jsx";
 import Reveal from "../components/Reveal.jsx";
-import StatCounter from "../components/StatCounter.jsx";
+import MetricDisplay from "../components/MetricDisplay.jsx";
 import Seo from "../components/Seo.jsx";
 
 const API_BASE = import.meta.env.VITE_API_URL ?? "/api/v1";
@@ -389,7 +389,7 @@ export default function Home() {
             </p>
           </Reveal>
 
-          <div className="feature-grid cols-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+          <div className="kt-brain-grid">
             {BRAIN_PILLARS.map((p, i) => (
               <Reveal key={p.title} delay={i * 80} className="feature-card kt-brain-card">
                 <div className="icon"><p.icon size={22} /></div>
@@ -521,10 +521,10 @@ export default function Home() {
       <section className="stats-section imigongo-bg imigongo-hero">
         <div className="container">
           <div className="stats-grid">
-            <StatCounter value={stats.familiesSupported} suffix="+" label="Families Supported" />
-            <StatCounter value={stats.caregiverSatisfaction} suffix="%" label="Caregiver Satisfaction" />
-            <StatCounter value={stats.languagesSupported} suffix=" Languages" label="Supported in App" />
-            <StatCounter value={24} suffix="/7" label="Access to Guidance" />
+            <MetricDisplay value={stats.familiesSupported} suffix="+" label="Families Supported" />
+            <MetricDisplay value={stats.caregiverSatisfaction} suffix="%" label="Caregiver Satisfaction" />
+            <MetricDisplay value={stats.languagesSupported} suffix=" Languages" label="Supported in App" />
+            <MetricDisplay value={24} suffix="/7" label="Access to Guidance" />
           </div>
         </div>
       </section>

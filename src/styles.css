@@ -1701,7 +1701,18 @@ img { max-width: 100%; }
 
 /* ── Brain cards ─────────────────────────────────────────────────────────── */
 
+.kt-brain-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 32px;
+}
+
 .kt-brain-card { margin-bottom: 0; }
+
+@media (max-width: 700px) {
+  .kt-brain-grid { grid-template-columns: 1fr; }
+}
 
 /* ── Journey pathway ─────────────────────────────────────────────────────── */
 

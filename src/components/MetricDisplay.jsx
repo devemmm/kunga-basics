@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
  * Animates a number counting up from 0 to `value` once it scrolls into view.
  * `suffix` is appended after the animated number (e.g. "+", "%").
  */
-export default function StatCounter({ value, suffix = "", duration = 1400, label }) {
+export default function MetricDisplay({ value, suffix = "", duration = 1400, label }) {
   const ref = useRef(null);
   const [count, setCount] = useState(0);
   const started = useRef(false);
