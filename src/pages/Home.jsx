@@ -1,22 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import {
-  Heart,
-  Clock,
-  TrendingUp,
-  Sparkles,
-  Video,
+  Brain,
   MessageCircle,
-  CalendarCheck,
+  Eye,
+  Zap,
+  Activity,
   BookOpen,
-  Users,
-  Globe,
-  CreditCard,
-  Bell,
-  PlayCircle,
   Star,
-  ChevronLeft,
   ChevronRight,
-  Download,
+  PlayCircle,
+  ArrowRight,
+  CheckCircle,
+  Users,
+  Heart,
+  TrendingUp,
+  Lightbulb,
+  Move,
 } from "lucide-react";
 import { trackEvent } from "../lib/track.js";
 import DownloadSection from "../components/DownloadSection.jsx";
@@ -32,94 +31,139 @@ const DEFAULT_STATS = {
   languagesSupported: 4,
 };
 
-const BENEFITS = [
+const SESSION_AREAS = [
+  { emoji: "🧠", title: "Attention Development", desc: "Building focus and sustained engagement." },
+  { emoji: "🗣️", title: "Communication Foundations", desc: "Strengthening the roots of language." },
+  { emoji: "👀", title: "Eye Contact & Social Engagement", desc: "Developing connection and interaction." },
+  { emoji: "⚖️", title: "Coordination & Balance", desc: "Movement that supports brain development." },
+  { emoji: "🎯", title: "Sensory Regulation", desc: "Calming the body so the mind can learn." },
+];
+
+const JOURNEY_STEPS = [
+  { icon: Brain, label: "Attention", color: "#16A34A" },
+  { icon: Users, label: "Interaction", color: "#10B981" },
+  { icon: MessageCircle, label: "Communication", color: "#16A34A" },
+  { icon: Activity, label: "Coordination", color: "#10B981" },
+  { icon: BookOpen, label: "Learning Readiness", color: "#16A34A" },
+];
+
+const FOUNDATIONS = [
   {
-    icon: Clock,
-    title: "Save Time",
-    desc: "Quick daily routines and bite-sized guidance that fit into even the busiest caregiving schedule.",
+    icon: Eye,
+    title: "Attention",
+    desc: "The ability to focus and take in information.",
+  },
+  {
+    icon: Brain,
+    title: "Understanding",
+    desc: "The brain processes what it sees, hears, and experiences.",
+  },
+  {
+    icon: Users,
+    title: "Interaction",
+    desc: "Engaging with people creates the desire to communicate.",
   },
   {
     icon: MessageCircle,
-    title: "Get Expert Advice",
-    desc: "Ask Dr. Gad your questions and get personalised, judgment-free guidance from a real expert.",
-  },
-  {
-    icon: TrendingUp,
-    title: "Track Progress",
-    desc: "Watch milestones, streaks, and journals build into a clear picture of your child's growth over time.",
-  },
-  {
-    icon: Heart,
-    title: "Support Every Milestone",
-    desc: "From first steps to first words, celebrate every win — big or small — along the way.",
+    title: "Communication",
+    desc: "Words come later when the brain is ready.",
   },
 ];
 
-const FEATURE_GROUPS = [
+const BRAIN_PILLARS = [
   {
-    title: "Learn",
-    desc: "Expert-led content, whenever you need it.",
-    items: [
-      { icon: Video, title: "Video Modules", desc: "Bite-sized expert lessons on child development." },
-      { icon: MessageCircle, title: "Ask Dr. Gad", desc: "Personalised video answers to your questions." },
-    ],
+    icon: Activity,
+    title: "Coordination",
+    desc: "Helps the brain organize and plan movements.",
   },
   {
-    title: "Track",
-    desc: "Build routines and watch progress unfold.",
-    items: [
-      { icon: CalendarCheck, title: "Daily Progress", desc: "Routines, streaks, and reminders that stick." },
-      { icon: BookOpen, title: "Journals", desc: "Capture milestones, moods, and daily wins." },
-    ],
+    icon: Lightbulb,
+    title: "Attention",
+    desc: "Builds focus, persistence, and engagement.",
   },
   {
-    title: "Family",
-    desc: "Built around how real families work.",
-    items: [
-      { icon: Users, title: "Child Profiles", desc: "Separate tracking for every child in your care." },
-      { icon: Globe, title: "Multi-language", desc: "English, French, Kinyarwanda, and Swahili." },
-    ],
-  },
-  {
-    title: "Account",
-    desc: "Flexible, secure, and under your control.",
-    items: [
-      { icon: CreditCard, title: "Payments", desc: "Mobile money & card payments built for the region." },
-      { icon: Bell, title: "Notifications", desc: "Gentle reminders for what matters most." },
-    ],
+    icon: Heart,
+    title: "Regulation",
+    desc: "Supports calm, balance, and readiness to learn.",
   },
 ];
+
+const OUTCOMES = [
+  { icon: Brain, title: "Stronger Foundations", desc: "Better attention, focus, and brain connections." },
+  { icon: Users, title: "Better Interaction", desc: "More connection, engagement, and social understanding." },
+  { icon: MessageCircle, title: "Clearer Communication", desc: "Improved language, expression, and communication skills." },
+  { icon: Move, title: "Improved Movement", desc: "Better coordination, balance, and body awareness." },
+  { icon: BookOpen, title: "Learning Readiness", desc: "Stronger readiness for school and daily learning." },
+  { icon: Star, title: "Greater Independence", desc: "More confidence, self-help skills, and independence." },
+];
+
+const PROGRAMS = [
+  {
+    name: "Foundation Program",
+    price: "$49",
+    period: "/month",
+    badge: "Start Here",
+    color: "var(--green)",
+    bestFor: "Parents who want to understand Kunga Therapy and build strong developmental foundations.",
+    includes: [
+      "Kunga Therapy Theory Cards",
+      "Understanding Autism",
+      "Understanding Speech Delay",
+      "Understanding ADHD",
+      "Understanding Cerebral Palsy",
+      "Understanding Down Syndrome",
+      "Sensory Regulation Foundations",
+      "Progress Tracking Journal",
+    ],
+    tag: "THEORY · UNDERSTANDING · FOUNDATIONS",
+  },
+  {
+    name: "Guided Implementation Program",
+    price: "$210",
+    period: "/month",
+    badge: "Full Support",
+    color: "#0F172A",
+    bestFor: "Parents actively implementing Kunga Therapy at home and seeking ongoing guidance.",
+    includes: [
+      "Everything in Foundation, plus:",
+      "Practical Training Videos",
+      "Autism Activities",
+      "Speech Development Activities",
+      "ADHD Activities",
+      "Cerebral Palsy Activities",
+      "Down Syndrome Activities",
+      "Coordination & Movement Training",
+      "Sensory Regulation Activities",
+      "Progress Reviews & Monitoring",
+      "Ask Dr. Gad Support",
+      "Priority Support",
+    ],
+    tag: "PRACTICAL TRAINING · ACTIVITIES · GUIDANCE · SUPPORT",
+    featured: true,
+  },
+];
+
+const CONDITIONS = ["Autism", "Speech Delay", "ADHD", "Cerebral Palsy", "Down Syndrome", "Developmental Delays"];
 
 const TESTIMONIALS = [
   {
     name: "Aline U.",
     role: "Mother of two, Kigali",
-    quote: "Kunga Basics helped me understand my son's milestones without feeling overwhelmed. The daily routines fit right into our mornings.",
+    quote: "Kunga Therapy helped me understand why my son wasn't speaking yet. Now I know what to work on every day, and I can see real progress.",
   },
   {
     name: "Eric N.",
     role: "Father & caregiver",
-    quote: "Ask Dr. Gad is a game changer — I finally have a place to ask the questions I was embarrassed to ask anyone else.",
+    quote: "Ask Dr. Gad changed everything — I finally understood how attention, interaction, and movement all connect to communication.",
   },
   {
     name: "Solange M.",
     role: "Caregiver, Huye",
-    quote: "The journal feature lets me look back and see how far my daughter has come. It's become part of our daily routine.",
+    quote: "The structured sessions give me confidence. I'm not just guessing anymore — I'm doing real Kunga Therapy with my daughter every day.",
   },
 ];
 
-const APP_PREVIEWS = [
-  { label: "Splash Screen", img: "/images/img-02.png" },
-  { label: "Daily Routines", img: "/images/img-03.png" },
-  { label: "Milestone Tracking", img: "/images/img-04.png" },
-  { label: "Ask Dr. Gad", img: "/images/img-06.png" },
-  { label: "Family Profiles", img: "/images/img-07.png" },
-  { label: "Journal", img: "/images/img-08.png" },
-];
-
 export default function Home() {
-  const previewRef = useRef(null);
-  const [activePreview, setActivePreview] = useState(0);
   const [stats, setStats] = useState(DEFAULT_STATS);
 
   useEffect(() => {
@@ -134,42 +178,15 @@ export default function Home() {
           languagesSupported: data.languagesSupported ?? prev.languagesSupported,
         }));
       })
-      .catch(() => { /* keep defaults — best-effort */ });
+      .catch(() => {});
     return () => { cancelled = true; };
   }, []);
-
-  useEffect(() => {
-    const el = previewRef.current;
-    if (!el) return;
-    const onScroll = () => {
-      const card = el.querySelector(".preview-card");
-      const step = card ? card.offsetWidth + 20 : el.clientWidth;
-      setActivePreview(Math.round(el.scrollLeft / step));
-    };
-    el.addEventListener("scroll", onScroll, { passive: true });
-    return () => el.removeEventListener("scroll", onScroll);
-  }, []);
-
-  const scrollPreview = (dir) => {
-    const el = previewRef.current;
-    if (!el) return;
-    const card = el.querySelector(".preview-card");
-    const step = card ? card.offsetWidth + 20 : el.clientWidth;
-    el.scrollBy({ left: dir * step, behavior: "smooth" });
-  };
-
-  const scrollToPreview = (index) => {
-    const el = previewRef.current;
-    if (!el) return;
-    const card = el.querySelector(".preview-card");
-    const step = card ? card.offsetWidth + 20 : el.clientWidth;
-    el.scrollTo({ left: index * step, behavior: "smooth" });
-  };
 
   return (
     <>
       <Seo
-        title="Kunga Basics — Autism, Speech Delay & ADHD Support App for Children"
+        title="Kunga Therapy — The Missing Link Between Attention, Interaction, Movement & Communication"
+        description="A structured child development program designed to strengthen the brain systems that support speech, attention, interaction, coordination, learning, and behavior. Supporting children with Autism, Speech Delay, ADHD, Cerebral Palsy, and Down Syndrome."
         jsonLd={{
           "@context": "https://schema.org",
           "@graph": [
@@ -179,7 +196,6 @@ export default function Home() {
               url: "https://kungabasics.com",
               logo: "https://kungabasics.com/icon.png",
               email: "info@kungabasics.com",
-              sameAs: [],
             },
             {
               "@type": "MobileApplication",
@@ -187,233 +203,321 @@ export default function Home() {
               applicationCategory: "HealthApplication",
               operatingSystem: "iOS, Android",
               description:
-                "Kunga Basics helps parents and caregivers support children with Autism, Speech Delay, ADHD, Down Syndrome, Cerebral Palsy, and other developmental challenges through guided daily routines, expert video modules, milestone tracking, and Ask Dr. Gad.",
-              offers: {
-                "@type": "Offer",
-                price: "14.00",
-                priceCurrency: "USD",
-              },
+                "Kunga Therapy — a structured child development program designed to strengthen the brain systems that support speech, attention, interaction, coordination, learning, and behavior.",
+              offers: { "@type": "Offer", price: "49.00", priceCurrency: "USD" },
             },
           ],
         }}
       />
 
-      {/* ── Hero ─────────────────────────────────────────────────────── */}
-      <section className="hero imigongo-bg imigongo-hero">
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <a
-              className="eyebrow"
-              href="/features"
-              onClick={() => trackEvent("click", "/", "hero_badge")}
-            >
-              <span className="badge-tag">New</span>
-              Progress tracking &amp; Ask Dr. Gad now live
-              <ChevronRight size={14} />
-            </a>
-            <h1>
-              Helping Every Child Reach Their{" "}
-              <span className="accent">Full Potential</span>
+      {/* ── Hero — Kunga Therapy Identity ───────────────────────────────── */}
+      <section className="hero imigongo-bg imigongo-hero kt-hero">
+        <div className="container">
+          <Reveal as="div" className="kt-hero-inner">
+            <div className="kt-trust-badge">
+              <Users size={14} />
+              Trusted by <strong>10,000+ Families</strong> Worldwide
+            </div>
+
+            <p className="kt-eyebrow">A Structured Child Development Program</p>
+            <h1 className="kt-headline">
+              KUNGA <span className="accent">THERAPY</span>
             </h1>
-            <p>
-              Expert guidance, developmental tracking, and personalized support
-              for caregivers — all in one app.
+            <p className="kt-tagline">
+              The Missing Link Between Attention, Interaction, Movement, and Communication.
             </p>
-            <p className="conditions-line">
-              Supporting children with <strong>Autism</strong>, <strong>Speech Delay</strong>,{" "}
-              <strong>ADHD</strong>, <strong>Down Syndrome</strong>,{" "}
-              <strong>Cerebral Palsy</strong>, and other developmental challenges.
+            <p className="kt-sub">
+              Support Communication. Improve Attention. Build Connection.
             </p>
-            <div className="actions">
+            <p className="kt-desc">
+              A structured child development program designed to strengthen the brain systems
+              that support speech, attention, interaction, coordination, learning, and behavior.
+            </p>
+
+            {/* 4-pillar visual */}
+            <div className="kt-pillars">
+              <div className="kt-pillar kt-pillar--tl">
+                <div className="kt-pillar-icon"><Eye size={22} /></div>
+                <span>Eye Contact</span>
+              </div>
+              <div className="kt-pillar kt-pillar--tr">
+                <div className="kt-pillar-icon"><Brain size={22} /></div>
+                <span>Attention</span>
+              </div>
+              <div className="kt-pillar-center">
+                <div className="kt-pillar-center-inner">
+                  <img src="/icon.png" alt="Kunga Therapy" className="kt-center-logo" />
+                  <p>Strong communication begins with<br /><strong>attention, interaction, and connection.</strong></p>
+                </div>
+              </div>
+              <div className="kt-pillar kt-pillar--bl">
+                <div className="kt-pillar-icon"><Heart size={22} /></div>
+                <span>Interaction</span>
+              </div>
+              <div className="kt-pillar kt-pillar--br">
+                <div className="kt-pillar-icon"><MessageCircle size={22} /></div>
+                <span>Communication</span>
+              </div>
+            </div>
+
+            <div className="kt-conditions">
+              <span className="kt-conditions-label">Supporting children with:</span>
+              {CONDITIONS.map((c) => (
+                <span key={c} className="kt-condition-tag">{c}</span>
+              ))}
+            </div>
+
+            <div className="actions" style={{ justifyContent: "center" }}>
               <a
                 className="btn btn-primary"
                 href="#download"
-                onClick={() => trackEvent("click", "/", "hero_get_started")}
+                onClick={() => trackEvent("click", "/", "hero_start_journey")}
               >
-                <Sparkles size={18} /> Get Started
+                Start Your Journey <ArrowRight size={16} />
               </a>
               <a
                 className="btn btn-dark-outline"
-                href="/features"
-                onClick={() => trackEvent("click", "/", "hero_watch_demo")}
+                href="#session"
+                onClick={() => trackEvent("click", "/", "hero_see_session")}
               >
-                <PlayCircle size={18} /> Watch Demo
+                <PlayCircle size={18} /> See Today's Session
               </a>
             </div>
-            <div className="trust-row">
-              <div className="avatar-stack">
-                <span>A</span>
-                <span>B</span>
-                <span>C</span>
-                <span>D</span>
-                <span>E</span>
-              </div>
-              <div className="trust-info">
-                <div className="stars">
-                  {Array.from({ length: 5 }).map((_, idx) => (
-                    <Star key={idx} size={14} fill="currentColor" />
-                  ))}
-                </div>
-                <p>Trusted by <strong>10,000+ families</strong> across Africa</p>
-              </div>
-            </div>
-          </div>
-
-          <div className="hero-visual">
-            <div className="phone-frame">
-              <div className="phone-screen">
-                <img
-                  src="/images/img-01.png"
-                  alt="Kunga Basics app home screen — daily routines and milestone tracking for children with Autism, ADHD and Speech Delay"
-                />
-              </div>
-            </div>
-            <div className="float-card card-1">
-              <CalendarCheck size={18} /> Routine completed!
-            </div>
-            <div className="float-card card-2">
-              <Star size={18} /> Milestone reached 🎉
-            </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── Why Parents Love Kunga Basics ───────────────────────────────── */}
-      <section className="section">
+      {/* ── Today's Kunga Session ─────────────────────────────────────────── */}
+      <section className="section" id="session" style={{ background: "var(--surface)" }}>
         <div className="container">
           <Reveal as="div" className="section-head">
-            <h2 className="section-ttl">Why Parents Love Kunga Basics</h2>
+            <p className="kt-section-eyebrow">Daily Structured Training</p>
+            <h2 className="section-ttl">Today's Kunga Session</h2>
             <p className="section-sub">
-              Everything you need to support your child's development, designed
-              around real life.
+              Every day, your child works through five targeted areas that build the brain
+              systems needed for communication, learning, and connection.
             </p>
           </Reveal>
-          <div className="feature-grid cols-4">
-            {BENEFITS.map((b, i) => (
-              <Reveal key={b.title} delay={i * 80} className="feature-card">
-                <div className="icon"><b.icon size={22} /></div>
-                <h3>{b.title}</h3>
-                <p>{b.desc}</p>
-              </Reveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* ── App Preview ──────────────────────────────────────────────────── */}
-      <section className="section" style={{ background: "var(--surface)" }}>
-        <div className="container">
-          <Reveal as="div" className="section-head">
-            <h2 className="section-ttl">A Closer Look at the App</h2>
-            <p className="section-sub">
-              A simple, friendly experience designed for busy caregivers — on
-              iOS and Android.
-            </p>
-          </Reveal>
           <Reveal>
-            <div className="app-preview-wrap">
-              <button
-                className="app-preview-arrow prev"
-                aria-label="Previous screenshot"
-                onClick={() => scrollPreview(-1)}
-              >
-                <ChevronLeft size={20} />
-              </button>
-              <div className="app-preview" ref={previewRef}>
-                {APP_PREVIEWS.map(({ label, img }) => (
-                  <div className="preview-card" key={label}>
-                    {img ? (
-                      <img src={img} alt={`Kunga Basics app — ${label} screen`} />
-                    ) : (
-                      <div className="placeholder">{label}</div>
-                    )}
+            <div className="kt-session-card">
+              <div className="kt-session-grid">
+                {SESSION_AREAS.map((area, i) => (
+                  <div className="kt-session-area" key={area.title}>
+                    <div className="kt-session-num">{i + 1}</div>
+                    <div className="kt-session-emoji">{area.emoji}</div>
+                    <div className="kt-session-text">
+                      <strong>{area.title}</strong>
+                      <span>{area.desc}</span>
+                    </div>
                   </div>
                 ))}
               </div>
-              <button
-                className="app-preview-arrow next"
-                aria-label="Next screenshot"
-                onClick={() => scrollPreview(1)}
-              >
-                <ChevronRight size={20} />
-              </button>
+              <div className="kt-session-cta">
+                <a
+                  className="btn btn-primary"
+                  href="#download"
+                  onClick={() => trackEvent("click", "/", "session_start_training")}
+                >
+                  <PlayCircle size={18} /> Start Today's Training
+                </a>
+              </div>
             </div>
-            <div className="app-preview-dots">
-              {APP_PREVIEWS.map(({ label }, i) => (
-                <button
-                  key={label}
-                  className={`app-preview-dot${i === activePreview ? " active" : ""}`}
-                  aria-label={`Go to ${label}`}
-                  onClick={() => scrollToPreview(i)}
-                />
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Why Your Child Understands But Doesn't Speak ────────────────── */}
+      <section className="section">
+        <div className="container">
+          <Reveal as="div" className="kt-split">
+            <div className="kt-split-copy">
+              <p className="kt-section-eyebrow">Understanding the Why</p>
+              <h2 className="kt-split-headline">
+                Why Your Child Understands<br />
+                But <span className="accent">Doesn't Speak</span>
+              </h2>
+              <p className="kt-split-sub">Speech begins long before words.</p>
+              <p>
+                It's not always about words. There is usually a deeper reason. Communication
+                is built on foundations that must develop first — and when those foundations
+                are weak, speech is delayed even when understanding is present.
+              </p>
+              <a
+                className="btn btn-outline"
+                href="#programs"
+                onClick={() => trackEvent("click", "/", "why_learn_more")}
+              >
+                Learn How Kunga Therapy Helps <ChevronRight size={16} />
+              </a>
+            </div>
+            <div className="kt-foundations-list">
+              <p className="kt-foundations-label">Communication is built on these foundations:</p>
+              {FOUNDATIONS.map((f, i) => (
+                <div className="kt-foundation-row" key={f.title}>
+                  <div className="kt-foundation-num">{i + 1}</div>
+                  <div className="kt-foundation-icon"><f.icon size={20} /></div>
+                  <div>
+                    <strong>{f.title}</strong>
+                    <p>{f.desc}</p>
+                  </div>
+                </div>
+              ))}
+              <div className="kt-foundation-insight">
+                <Brain size={18} />
+                <p>
+                  Learn how <strong>attention, interaction, sensory regulation,
+                  movement, and learning readiness</strong> work together to support communication.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Build The Brain Before The Words ─────────────────────────────── */}
+      <section className="section" style={{ background: "var(--surface)" }}>
+        <div className="container">
+          <Reveal as="div" className="section-head">
+            <p className="kt-section-eyebrow">The Brain-Body Connection</p>
+            <h2 className="section-ttl">
+              Build the Brain<br /><span className="accent">Before the Words</span>
+            </h2>
+            <p className="section-sub">
+              Many children are taught words before the brain is ready to use them.
+              Movement, coordination, and regulation build the foundation for communication and learning.
+            </p>
+          </Reveal>
+
+          <div className="feature-grid cols-4" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))" }}>
+            {BRAIN_PILLARS.map((p, i) => (
+              <Reveal key={p.title} delay={i * 80} className="feature-card kt-brain-card">
+                <div className="icon"><p.icon size={22} /></div>
+                <h3>{p.title}</h3>
+                <p>{p.desc}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal>
+            <div className="kt-insight-banner">
+              <Brain size={20} />
+              <p>When the body is ready, the brain can <strong>focus, communicate, and learn.</strong></p>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Child Development Journey ──────────────────────────────────────── */}
+      <section className="section">
+        <div className="container">
+          <Reveal as="div" className="section-head">
+            <p className="kt-section-eyebrow">The Kunga Development Pathway</p>
+            <h2 className="section-ttl">Child Development Journey</h2>
+            <p className="section-sub">
+              Stronger foundations in every area lead to lifelong progress.
+              Small daily steps create big developmental changes.
+            </p>
+          </Reveal>
+
+          <Reveal>
+            <div className="kt-journey">
+              {JOURNEY_STEPS.map((step, i) => (
+                <div className="kt-journey-step" key={step.label}>
+                  <div className="kt-journey-icon" style={{ background: step.color }}>
+                    <step.icon size={22} color="#fff" />
+                  </div>
+                  <span className="kt-journey-label">{step.label}</span>
+                  {i < JOURNEY_STEPS.length - 1 && (
+                    <div className="kt-journey-arrow"><ArrowRight size={18} /></div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <div className="kt-journey-areas">
+              {["Communication", "Attention", "Interaction", "Coordination", "Learning Readiness"].map((a) => (
+                <div className="kt-journey-area-chip" key={a}>
+                  <CheckCircle size={14} />
+                  {a}
+                </div>
               ))}
             </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Features grouped by category ────────────────────────────────── */}
+      {/* ── Today's Recommended Lesson ────────────────────────────────────── */}
+      <section className="section" style={{ background: "var(--surface)" }}>
+        <div className="container">
+          <Reveal as="div" className="section-head">
+            <p className="kt-section-eyebrow">Today's Recommended Lesson</p>
+            <h2 className="section-ttl">Start With This</h2>
+          </Reveal>
+
+          <Reveal>
+            <div className="kt-lesson-card">
+              <div className="kt-lesson-thumb">
+                <PlayCircle size={48} color="#fff" />
+              </div>
+              <div className="kt-lesson-body">
+                <span className="kt-lesson-tag">Featured Lesson</span>
+                <h3>"Why Your Child Understands But Doesn't Speak"</h3>
+                <p>
+                  Discover the developmental foundations behind communication — and learn
+                  exactly what you can do today to help your child move forward.
+                </p>
+                <a
+                  className="btn btn-primary"
+                  href="#download"
+                  onClick={() => trackEvent("click", "/", "lesson_watch")}
+                >
+                  <PlayCircle size={16} /> Watch Lesson
+                </a>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── What Your Child Can Gain ──────────────────────────────────────── */}
       <section className="section">
         <div className="container">
           <Reveal as="div" className="section-head">
-            <h2 className="section-ttl">Everything You Need, In One Place</h2>
+            <p className="kt-section-eyebrow">Real Change. Real Impact.</p>
+            <h2 className="section-ttl">
+              Real Change for <span className="accent">Real Life</span>
+            </h2>
             <p className="section-sub">
-              Learn, track, and grow together — with tools built for every part
-              of your caregiving journey.
+              When you support the whole child — brain, body, and connection — amazing things happen.
             </p>
           </Reveal>
 
-          {FEATURE_GROUPS.map((group, gi) => (
-            <Reveal key={group.title} delay={gi * 60} style={{ marginBottom: 40 }}>
-              <h3 className="group-ttl">{group.title}</h3>
-              <p className="section-sub" style={{ marginBottom: 20 }}>{group.desc}</p>
-              <div className="feature-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
-                {group.items.map((f) => (
-                  <div className="feature-card" key={f.title}>
-                    <div className="icon"><f.icon size={22} /></div>
-                    <h3>{f.title}</h3>
-                    <p>{f.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </Reveal>
-          ))}
+          <div className="feature-grid" style={{ gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))" }}>
+            {OUTCOMES.map((o, i) => (
+              <Reveal key={o.title} delay={i * 60} className="feature-card">
+                <div className="icon"><o.icon size={22} /></div>
+                <h3>{o.title}</h3>
+                <p>{o.desc}</p>
+              </Reveal>
+            ))}
+          </div>
 
-          <Reveal style={{ textAlign: "center", marginTop: 8 }}>
-            <a
-              className="btn btn-outline"
-              href="/features"
-              onClick={() => trackEvent("click", "/", "home_explore_features")}
-            >
-              Explore All Features
-            </a>
+          <Reveal delay={100}>
+            <div className="kt-insight-banner" style={{ marginTop: 40 }}>
+              <Heart size={20} />
+              <p>
+                Kunga Therapy is used by families supporting children with <strong>speech delays, autism,
+                ADHD, Down syndrome, cerebral palsy,</strong> and other developmental challenges.
+              </p>
+            </div>
           </Reveal>
         </div>
       </section>
 
-      {/* ── Mid-page CTA ─────────────────────────────────────────────────── */}
-      <section className="mid-cta imigongo-bg imigongo-hero">
-        <div className="container mid-cta-inner">
-          <Reveal as="div">
-            <h2>Ready to support your child's growth?</h2>
-            <p>
-              Download Kunga Basics today — free for every family, with expert
-              guidance always within reach.
-            </p>
-          </Reveal>
-          <Reveal delay={80}>
-            <a
-              className="btn btn-primary"
-              href="#download"
-              onClick={() => trackEvent("click", "/", "mid_cta_download")}
-            >
-              <Download size={18} /> Download the App
-            </a>
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── Stats / Social proof ─────────────────────────────────────────── */}
+      {/* ── Stats ─────────────────────────────────────────────────────────── */}
       <section className="stats-section imigongo-bg imigongo-hero">
         <div className="container">
           <div className="stats-grid">
@@ -425,13 +529,121 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Testimonials ─────────────────────────────────────────────────── */}
+      {/* ── Programs ──────────────────────────────────────────────────────── */}
+      <section className="section" id="programs" style={{ background: "var(--surface)" }}>
+        <div className="container">
+          <Reveal as="div" className="section-head">
+            <p className="kt-section-eyebrow">Choose Your Program</p>
+            <h2 className="section-ttl">
+              Every Child is Unique.<br />Their Plan Should Be Too.
+            </h2>
+            <p className="section-sub">
+              Choose the program that fits your child's needs and your family's goals.
+              Start today. Change your child's tomorrow.
+            </p>
+          </Reveal>
+
+          <div className="kt-programs-grid">
+            {PROGRAMS.map((prog) => (
+              <Reveal key={prog.name} className={`kt-program-card${prog.featured ? " kt-program-card--featured" : ""}`}>
+                <div className="kt-program-badge" style={{ background: prog.color }}>
+                  {prog.badge}
+                </div>
+                <h3>{prog.name}</h3>
+                <div className="kt-program-price">
+                  <span className="kt-price-amount">{prog.price}</span>
+                  <span className="kt-price-period">{prog.period}</span>
+                </div>
+                <ul className="kt-program-includes">
+                  {prog.includes.map((item) => (
+                    <li key={item}>
+                      <CheckCircle size={14} color="var(--green)" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+                <div className="kt-program-best">
+                  <Star size={14} />
+                  <span><strong>Best For:</strong> {prog.bestFor}</span>
+                </div>
+                <a
+                  className={`btn ${prog.featured ? "btn-primary" : "btn-outline"}`}
+                  href="#download"
+                  onClick={() => trackEvent("click", "/", `program_${prog.featured ? "guided" : "foundation"}`)}
+                  style={{ width: "100%", justifyContent: "center" }}
+                >
+                  Get Started <ArrowRight size={16} />
+                </a>
+                <p className="kt-program-tag">{prog.tag}</p>
+              </Reveal>
+            ))}
+          </div>
+
+          <Reveal delay={80}>
+            <div className="kt-program-reassurance">
+              {[
+                { icon: "✓", label: "Cancel Anytime", desc: "You're in control." },
+                { icon: "🔒", label: "No Long-Term Commitment", desc: "Flexible and hassle-free." },
+                { icon: "✦", label: "New Content Added Regularly", desc: "Fresh lessons every month." },
+                { icon: "▶", label: "Access While Active", desc: "Learn anytime, anywhere." },
+              ].map((r) => (
+                <div className="kt-reassurance-item" key={r.label}>
+                  <span className="kt-reassurance-icon">{r.icon}</span>
+                  <div>
+                    <strong>{r.label}</strong>
+                    <p>{r.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Ask Dr. Gad ───────────────────────────────────────────────────── */}
+      <section className="mid-cta imigongo-bg imigongo-hero">
+        <div className="container mid-cta-inner">
+          <Reveal as="div">
+            <p className="kt-section-eyebrow" style={{ color: "rgba(255,255,255,.7)" }}>Expert Guidance, Personalised</p>
+            <h2>Ask Dr. Gad</h2>
+            <p>
+              Have questions about your child's development? Get personalised, judgment-free
+              guidance directly from Dr. Gad — a real expert who understands your journey.
+            </p>
+          </Reveal>
+          <Reveal delay={80}>
+            <div className="kt-askgad-features">
+              {[
+                "Submit questions about your child",
+                "Get personalised video answers",
+                "Expert knowledge you can trust",
+                "Available in your language",
+              ].map((f) => (
+                <div className="kt-askgad-feature" key={f}>
+                  <CheckCircle size={16} color="var(--green-2)" />
+                  <span>{f}</span>
+                </div>
+              ))}
+            </div>
+            <a
+              className="btn btn-primary"
+              href="#download"
+              onClick={() => trackEvent("click", "/", "askgad_cta")}
+            >
+              Ask Dr. Gad <ArrowRight size={16} />
+            </a>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── Testimonials ──────────────────────────────────────────────────── */}
       <section className="section" style={{ background: "var(--surface)" }}>
         <div className="container">
           <Reveal as="div" className="section-head">
-            <h2 className="section-ttl">Real Stories, Real Progress</h2>
+            <p className="kt-section-eyebrow">Real Families. Real Progress.</p>
+            <h2 className="section-ttl">Stories of Transformation</h2>
             <p className="section-sub">
-              Hear from caregivers who use Kunga Basics every day.
+              Hear from parents who use Kunga Therapy every day.
             </p>
           </Reveal>
           <div className="testimonial-grid">
@@ -456,7 +668,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Conversion / Download ────────────────────────────────────────── */}
+      {/* ── Download ──────────────────────────────────────────────────────── */}
       <DownloadSection />
     </>
   );
