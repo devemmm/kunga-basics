@@ -1486,7 +1486,7 @@ img { max-width: 100%; }
    ═══════════════════════════════════════════════════════════════════════════ */
 
 .kt-hero-v2 {
-  background: #f9efe5;
+  background: linear-gradient(160deg, #e6f4ea 0%, #f0faf4 55%, #fdf6f0 100%);
   padding-bottom: 0;
   overflow: visible;
 }
@@ -1608,11 +1608,7 @@ img { max-width: 100%; }
 .kt-v2-photo {
   width: 100%;
   display: block;
-  border-radius: 20px;
-  object-fit: cover;
-  aspect-ratio: 3/4;
-  object-position: center top;
-  box-shadow: 0 8px 32px rgba(0,0,0,.10);
+  filter: drop-shadow(0 20px 40px rgba(20,83,45,.18));
 }
 
 /* Center Kunga plant icon on the photo */
@@ -1676,10 +1672,10 @@ img { max-width: 100%; }
 }
 
 /* Pillar positions — floating on photo edges like reference */
-.kt-pillar--attention    { top: 0;      left: 50%;  transform: translate(-50%, -50%); }
-.kt-pillar--interaction  { top: 46%;    left: 0;    transform: translate(-50%, -50%); }
-.kt-pillar--communication { top: 46%;   right: 0;   transform: translate(50%, -50%); }
-.kt-pillar--movement     { bottom: 0;   left: 50%;  transform: translate(-50%, 50%); }
+.kt-pillar--attention    { top: 10%;    left: 50%;  transform: translate(-50%, -50%); }
+.kt-pillar--interaction  { top: 32%;    left: 8%;   transform: translate(-50%, -50%); }
+.kt-pillar--communication { top: 32%;  right: 2%;  transform: translate(50%, -50%); }
+.kt-pillar--movement     { bottom: 10%; left: 50%; transform: translate(-50%, 50%); }
 
 /* Message bar */
 .kt-v2-message {
@@ -1917,11 +1913,7 @@ img { max-width: 100%; }
 .kt-v2-photo {
   width: 100%;
   display: block;
-  border-radius: 24px;
-  object-fit: cover;
-  aspect-ratio: 3/4;
-  object-position: center top;
-  box-shadow: 0 20px 60px rgba(0,0,0,.15);
+  filter: drop-shadow(0 20px 40px rgba(20,83,45,.18));
 }
 
 .kt-hero-features {
@@ -1970,8 +1962,29 @@ img { max-width: 100%; }
     padding-top: 24px;
     padding-bottom: 32px;
   }
-  .kt-hero-right { order: -1; }
   .kt-hero-features { grid-template-columns: repeat(2, 1fr); }
+
+  /* Photo below text; contain pillar badges within viewport */
+  .kt-v2-photo-wrap {
+    max-width: 100%;
+    padding: 24px 16px 32px;
+  }
+
+  /* Scale down pillar badges */
+  .kt-pillar {
+    padding: 5px 9px;
+    font-size: 11px;
+    gap: 4px;
+  }
+  .kt-pillar-icon {
+    width: 26px;
+    height: 26px;
+  }
+  .kt-pillar-icon svg { width: 13px; height: 13px; }
+
+  /* Reposition side pillars to stay inside the viewport */
+  .kt-pillar--interaction  { left: 0; transform: translate(8px, -50%); }
+  .kt-pillar--communication { right: 0; transform: translate(-8px, -50%); }
 }
 
 @media (max-width: 520px) {

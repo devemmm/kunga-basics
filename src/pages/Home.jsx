@@ -283,7 +283,7 @@ export default function Home() {
           <Reveal className="kt-hero-right">
             <div className="kt-v2-photo-wrap">
               <img
-                src="/images/image-to-use.jpeg"
+                src="/images/hero-mother-child.png"
                 alt="Mother engaging with child — Kunga Therapy"
                 className="kt-v2-photo"
               />
