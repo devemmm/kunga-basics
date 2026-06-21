@@ -178,7 +178,7 @@ export default function Home() {
           languagesSupported: data.languagesSupported ?? prev.languagesSupported,
         }));
       })
-      .catch(() => {});
+      .catch(() => { });
     return () => { cancelled = true; };
   }, []);
 
@@ -210,10 +210,11 @@ export default function Home() {
         }}
       />
 
-      {/* ── Hero — Kunga Therapy Identity (light) ───────────────────────── */}
+      {/* ── Hero — Premium Split Layout ──────────────────────────────────── */}
       <section className="kt-hero-v2">
-        {/* Top bar */}
-        <div className="kt-v2-topbar container">
+
+        {/* Brand topbar */}
+        {/* <div className="kt-v2-topbar container">
           <div className="kt-v2-brand">
             <img src="/icon.png" alt="Kunga Therapy" />
             <div>
@@ -228,102 +229,99 @@ export default function Home() {
               <span className="kt-v2-trust-label">Families Worldwide</span>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        {/* Headline */}
-        <div className="container">
-          <Reveal as="div" className="kt-v2-headline-wrap">
-            <h1 className="kt-v2-headline">
-              The Missing Link
+        {/* Split: copy left | photo right */}
+        <div className="kt-hero-split container">
+
+          {/* LEFT — headline, description, chips, banner, CTA, stats */}
+          <Reveal as="div" className="kt-hero-left">
+            <h1 className="kt-hero-h1">
+              The <span className="kt-hero-accent">Missing<br />Link</span>
             </h1>
-            <p className="kt-v2-tagline">
+            <p className="kt-hero-sub">
               Between <strong>Attention</strong>, <strong>Interaction</strong>,{" "}
               <strong>Movement</strong>, and <strong>Communication</strong>.
+              A structured therapy program that builds the brain foundations every child needs.
             </p>
-          </Reveal>
-
-          {/* Central visual — pillars + photo + SVG arrows */}
-          <Reveal>
-            <div className="kt-v2-visual">
-
-              {/* SVG connecting dashed lines */}
-              <svg className="kt-v2-svg" viewBox="0 0 500 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                {/* Center → Attention (top) */}
-                <line x1="250" y1="210" x2="250" y2="80" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
-                {/* Center → Interaction (left) */}
-                <line x1="250" y1="210" x2="80" y2="210" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
-                {/* Center → Communication (right) */}
-                <line x1="250" y1="210" x2="420" y2="210" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
-                {/* Center → Movement (bottom) */}
-                <line x1="250" y1="210" x2="250" y2="345" stroke="#16A34A" strokeWidth="1.5" strokeDasharray="5,4" markerEnd="url(#arrowGreen)" />
-                <defs>
-                  <marker id="arrowGreen" markerWidth="7" markerHeight="7" refX="5" refY="3.5" orient="auto">
-                    <polygon points="0 0, 7 3.5, 0 7" fill="#16A34A" />
-                  </marker>
-                </defs>
-              </svg>
-
-              {/* Center photo */}
-              <div className="kt-v2-center-photo">
-                <img
-                  src="/images/hero-mother-child.jpg"
-                  alt="Mother engaging with child — Kunga Therapy"
-                />
-              </div>
-
-              {/* Kunga center logo overlay */}
-              <div className="kt-v2-center-logo">
-                <img src="/icon.png" alt="Kunga Therapy" />
-              </div>
-
-              {/* Attention — top */}
-              <div className="kt-v2-node kt-v2-node--top">
-                <div className="kt-v2-node-icon"><Brain size={22} /></div>
-                <span>Attention</span>
-              </div>
-
-              {/* Interaction — left */}
-              <div className="kt-v2-node kt-v2-node--left">
-                <div className="kt-v2-node-icon"><Users size={22} /></div>
-                <span>Interaction</span>
-              </div>
-
-              {/* Communication — right */}
-              <div className="kt-v2-node kt-v2-node--right">
-                <div className="kt-v2-node-icon"><MessageCircle size={22} /></div>
-                <span>Communication</span>
-              </div>
-
-              {/* Movement — bottom */}
-              <div className="kt-v2-node kt-v2-node--bottom">
-                <div className="kt-v2-node-icon"><Move size={22} /></div>
-                <span>Movement</span>
-              </div>
+            <div className="kt-hero-chips">
+              {[
+                { icon: Brain, label: "Attention" },
+                { icon: Users, label: "Interaction" },
+                { icon: Move, label: "Movement" },
+                { icon: MessageCircle, label: "Communication" },
+              ].map((c) => (
+                <span key={c.label} className="kt-hero-chip">
+                  <c.icon size={14} /> {c.label}
+                </span>
+              ))}
             </div>
-          </Reveal>
-
-          {/* Message bar */}
-          <Reveal>
-            <div className="kt-v2-message">
-              <div className="kt-v2-message-icon"><Heart size={20} /></div>
+            <div className="kt-hero-banner">
+              <Heart size={18} />
               <p>
                 Strong communication begins with{" "}
                 <strong>attention, interaction, and connection.</strong>
               </p>
             </div>
+            <a
+              className="btn btn-primary kt-hero-cta"
+              href="#download"
+              onClick={() => trackEvent("click", "/", "hero_start_journey")}
+            >
+              START YOUR JOURNEY <ArrowRight size={20} />
+            </a>
+            <div className="kt-hero-mini-stats">
+              <div className="kt-hero-stat"><strong>10,000+</strong><span>Families</span></div>
+              <div className="kt-hero-stat-div" />
+              <div className="kt-hero-stat"><strong>95%</strong><span>Satisfaction</span></div>
+              <div className="kt-hero-stat-div" />
+              <div className="kt-hero-stat"><strong>4</strong><span>Languages</span></div>
+            </div>
           </Reveal>
 
-          {/* 4-feature strip */}
+          {/* RIGHT — photo + floating pillar badges */}
+          <Reveal className="kt-hero-right">
+            <div className="kt-v2-photo-wrap">
+              <img
+                src="/images/image-to-use.jpeg"
+                alt="Mother engaging with child — Kunga Therapy"
+                className="kt-v2-photo"
+              />
+              <div className="kt-pillar-center">
+                <img src="/icon.png" alt="Kunga Therapy" />
+              </div>
+              <div className="kt-pillar kt-pillar--attention">
+                <div className="kt-pillar-icon"><Brain size={20} /></div>
+                <span>Attention</span>
+              </div>
+              <div className="kt-pillar kt-pillar--interaction">
+                <div className="kt-pillar-icon"><Users size={20} /></div>
+                <span>Interaction</span>
+              </div>
+              <div className="kt-pillar kt-pillar--communication">
+                <div className="kt-pillar-icon"><MessageCircle size={20} /></div>
+                <span>Communication</span>
+              </div>
+              <div className="kt-pillar kt-pillar--movement">
+                <div className="kt-pillar-icon"><Move size={20} /></div>
+                <span>Movement</span>
+              </div>
+            </div>
+          </Reveal>
+        </div>
+
+        {/* Feature cards — full width below the split */}
+        <div className="container">
           <Reveal>
-            <div className="kt-v2-features">
+            <div className="kt-hero-features">
               {[
-                { icon: Brain, label: "Understand", desc: "the why behind your child's development." },
-                { icon: BookOpen, label: "Learn", desc: "practical strategies you can use at home." },
-                { icon: TrendingUp, label: "Track", desc: "real progress every step of the way." },
-                { icon: Users, label: "Transform", desc: "daily moments into meaningful development." },
+                { icon: Brain, label: "Understand", desc: "Understand the reasons behind your child's developmental challenges." },
+                { icon: BookOpen, label: "Learn", desc: "Access practical strategies and expert guidance you can use at home." },
+                { icon: TrendingUp, label: "Track", desc: "Monitor real progress and milestones every step of the way." },
+                { icon: Users, label: "Transform", desc: "Turn daily interactions into meaningful developmental growth." },
               ].map((f) => (
-                <div className="kt-v2-feature" key={f.label}>
-                  <div className="kt-v2-feature-icon"><f.icon size={28} /></div>
+                <div className="kt-hero-feat" key={f.label}>
+                  <div className="kt-hero-feat-icon"><f.icon size={30} /></div>
                   <strong>{f.label}</strong>
                   <span>{f.desc}</span>
                 </div>
@@ -331,21 +329,17 @@ export default function Home() {
             </div>
           </Reveal>
 
-          {/* CTA */}
           <Reveal delay={60}>
             <div className="kt-v2-cta-wrap">
               <a
                 className="btn btn-primary kt-v2-cta"
                 href="#download"
-                onClick={() => trackEvent("click", "/", "hero_start_journey")}
+                onClick={() => trackEvent("click", "/", "hero_cta_bottom")}
               >
                 START YOUR JOURNEY <ArrowRight size={18} />
               </a>
               <div className="kt-v2-dots">
-                <span className="active" />
-                <span />
-                <span />
-                <span />
+                <span className="active" /><span /><span /><span />
               </div>
             </div>
           </Reveal>
@@ -432,7 +426,7 @@ export default function Home() {
                 <Brain size={18} />
                 <p>
                   Learn how <strong>attention, interaction, sensory regulation,
-                  movement, and learning readiness</strong> work together to support communication.
+                    movement, and learning readiness</strong> work together to support communication.
                 </p>
               </div>
             </div>
@@ -575,7 +569,7 @@ export default function Home() {
               <Heart size={20} />
               <p>
                 Kunga Therapy is used by families supporting children with <strong>speech delays, autism,
-                ADHD, Down syndrome, cerebral palsy,</strong> and other developmental challenges.
+                  ADHD, Down syndrome, cerebral palsy,</strong> and other developmental challenges.
               </p>
             </div>
           </Reveal>
