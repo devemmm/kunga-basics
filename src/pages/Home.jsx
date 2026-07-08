@@ -404,7 +404,7 @@ export default function Home() {
               </p>
               <a
                 className="btn btn-outline"
-                href="#programs"
+                href="#download"
                 onClick={() => trackEvent("click", "/", "why_learn_more")}
               >
                 Learn How Kunga Therapy Helps <ChevronRight size={16} />
@@ -588,76 +588,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── Programs ──────────────────────────────────────────────────────── */}
-      <section className="section" id="programs" style={{ background: "var(--surface)" }}>
-        <div className="container">
-          <Reveal as="div" className="section-head">
-            <p className="kt-section-eyebrow">Choose Your Program</p>
-            <h2 className="section-ttl">
-              Every Child is Unique.<br />Their Plan Should Be Too.
-            </h2>
-            <p className="section-sub">
-              Choose the program that fits your child's needs and your family's goals.
-              Start today. Change your child's tomorrow.
-            </p>
-          </Reveal>
-
-          <div className="kt-programs-grid">
-            {PROGRAMS.map((prog) => (
-              <Reveal key={prog.name} className={`kt-program-card${prog.featured ? " kt-program-card--featured" : ""}`}>
-                <div className="kt-program-badge" style={{ background: prog.color }}>
-                  {prog.badge}
-                </div>
-                <h3>{prog.name}</h3>
-                <div className="kt-program-price">
-                  <span className="kt-price-amount">{prog.price}</span>
-                  <span className="kt-price-period">{prog.period}</span>
-                </div>
-                <ul className="kt-program-includes">
-                  {prog.includes.map((item) => (
-                    <li key={item}>
-                      <CheckCircle size={14} color="var(--green)" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="kt-program-best">
-                  <Star size={14} />
-                  <span><strong>Best For:</strong> {prog.bestFor}</span>
-                </div>
-                <a
-                  className={`btn ${prog.featured ? "btn-primary" : "btn-outline"}`}
-                  href="#download"
-                  onClick={() => trackEvent("click", "/", `program_${prog.featured ? "guided" : "foundation"}`)}
-                  style={{ width: "100%", justifyContent: "center" }}
-                >
-                  Get Started <ArrowRight size={16} />
-                </a>
-                <p className="kt-program-tag">{prog.tag}</p>
-              </Reveal>
-            ))}
-          </div>
-
-          <Reveal delay={80}>
-            <div className="kt-program-reassurance">
-              {[
-                { icon: "✓", label: "Cancel Anytime", desc: "You're in control." },
-                { icon: "🔒", label: "No Long-Term Commitment", desc: "Flexible and hassle-free." },
-                { icon: "✦", label: "New Content Added Regularly", desc: "Fresh lessons every month." },
-                { icon: "▶", label: "Access While Active", desc: "Learn anytime, anywhere." },
-              ].map((r) => (
-                <div className="kt-reassurance-item" key={r.label}>
-                  <span className="kt-reassurance-icon">{r.icon}</span>
-                  <div>
-                    <strong>{r.label}</strong>
-                    <p>{r.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </Reveal>
-        </div>
-      </section>
+      {/* ── Programs (hidden) ─────────────────────────────────────────────── */}
 
       {/* ── Ask Dr. Gad ───────────────────────────────────────────────────── */}
       <section className="mid-cta imigongo-bg imigongo-hero">
