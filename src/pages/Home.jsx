@@ -265,7 +265,7 @@ export default function Home() {
             </div>
             <a
               className="btn btn-primary kt-hero-cta"
-              href="#download"
+              href="https://user.kungabasics.com/register"
               onClick={() => trackEvent("click", "/", "hero_start_journey")}
             >
               START YOUR JOURNEY <ArrowRight size={20} />
@@ -333,7 +333,7 @@ export default function Home() {
             <div className="kt-v2-cta-wrap">
               <a
                 className="btn btn-primary kt-v2-cta"
-                href="#download"
+                href="https://user.kungabasics.com/register"
                 onClick={() => trackEvent("click", "/", "hero_cta_bottom")}
               >
                 START YOUR JOURNEY <ArrowRight size={18} />
@@ -375,7 +375,7 @@ export default function Home() {
               <div className="kt-session-cta">
                 <a
                   className="btn btn-primary"
-                  href="#download"
+                  href="https://user.kungabasics.com/register"
                   onClick={() => trackEvent("click", "/", "session_start_training")}
                 >
                   <PlayCircle size={18} /> Start Today's Training
@@ -404,7 +404,7 @@ export default function Home() {
               </p>
               <a
                 className="btn btn-outline"
-                href="#download"
+                href="https://user.kungabasics.com/register"
                 onClick={() => trackEvent("click", "/", "why_learn_more")}
               >
                 Learn How Kunga Therapy Helps <ChevronRight size={16} />
@@ -530,7 +530,7 @@ export default function Home() {
                 </p>
                 <a
                   className="btn btn-primary"
-                  href="#download"
+                  href="https://user.kungabasics.com/register"
                   onClick={() => trackEvent("click", "/", "lesson_watch")}
                 >
                   <PlayCircle size={16} /> Watch Lesson
