@@ -191,6 +191,80 @@ img { max-width: 100%; }
   z-index: 110;
 }
 
+/* ── Header CTA buttons ────────────────────────────────────────────────── */
+
+.header-cta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: 8px;
+}
+
+.header-btn-signin {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--green) !important;
+  border: 1.5px solid var(--green);
+  background: transparent;
+  transition: background .15s, color .15s;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.header-btn-signin:hover {
+  background: rgba(22,163,74,.07);
+  text-decoration: none !important;
+}
+
+.site-header--dark .header-btn-signin {
+  color: #fff !important;
+  border-color: rgba(255,255,255,.45);
+}
+.site-header--dark .header-btn-signin:hover {
+  background: rgba(255,255,255,.1);
+}
+
+.header-btn-signup {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff !important;
+  background: var(--green);
+  border: 1.5px solid var(--green);
+  transition: opacity .15s, transform .15s;
+  text-decoration: none !important;
+  white-space: nowrap;
+}
+.header-btn-signup:hover {
+  opacity: .88;
+  transform: translateY(-1px);
+  text-decoration: none !important;
+}
+
+/* Mobile: stack buttons inside the open drawer */
+@media (max-width: 860px) {
+  .header-cta {
+    flex-direction: column;
+    align-items: stretch;
+    margin-left: 0;
+    margin-top: 8px;
+    padding: 0 4px;
+    gap: 10px;
+  }
+  .header-btn-signin,
+  .header-btn-signup {
+    justify-content: center;
+    padding: 11px 20px;
+    font-size: 15px;
+  }
+}
+
 /* ── Buttons ───────────────────────────────────────────────────────────── */
 
 .btn {
@@ -1019,6 +1093,67 @@ img { max-width: 100%; }
   background: var(--gradient-primary);
   color: #fff;
   overflow: hidden;
+}
+
+/* ── Web CTA (below QR cards) ──────────────────────────────────────────── */
+
+.web-cta-divider {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 320px;
+  margin: 0 auto 20px;
+  color: rgba(255,255,255,.5);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  text-transform: uppercase;
+}
+.web-cta-divider::before,
+.web-cta-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,.2);
+}
+
+.web-cta-label {
+  color: rgba(255,255,255,.75);
+  font-size: 15px;
+  margin: 0 0 18px;
+}
+
+.btn-web-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(255,255,255,.12);
+  color: #fff !important;
+  border: 1.5px solid rgba(255,255,255,.35);
+  border-radius: 999px;
+  padding: 13px 28px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none !important;
+  transition: background .18s, transform .18s;
+  backdrop-filter: blur(8px);
+}
+.btn-web-cta:hover {
+  background: rgba(255,255,255,.22);
+  transform: translateY(-2px);
+  text-decoration: none !important;
+}
+
+.web-cta-signin {
+  margin: 16px 0 0;
+  font-size: 13px;
+  color: rgba(255,255,255,.6);
+}
+.web-cta-signin a {
+  color: #fff !important;
+  font-weight: 700;
+  text-decoration: underline;
 }
 
 .conversion-section h2 {

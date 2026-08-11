@@ -53,6 +53,24 @@ export default function Header() {
           <NavLink to="/location" onClick={() => setOpen(false)}>Location</NavLink>
           <NavLink to="/privacy" onClick={() => setOpen(false)}>Privacy</NavLink>
           <NavLink to="/terms" onClick={() => setOpen(false)}>Terms</NavLink>
+
+          {/* Portal CTA buttons */}
+          <div className="header-cta">
+            <a
+              href="https://user.kungabasics.com/login"
+              className="header-btn-signin"
+              onClick={() => setOpen(false)}
+            >
+              Sign in
+            </a>
+            <a
+              href="https://user.kungabasics.com/register"
+              className="header-btn-signup"
+              onClick={() => setOpen(false)}
+            >
+              Get started
+            </a>
+          </div>
         </nav>
       </div>
     </header>

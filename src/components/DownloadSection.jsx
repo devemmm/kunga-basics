@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { QRCodeSVG } from "qrcode.react";
-import { Download, Heart, Globe2, ShieldCheck } from "lucide-react";
+import { Download, Heart, Globe2, ShieldCheck, Monitor } from "lucide-react";
 import { trackEvent } from "../lib/track.js";
 import { getStoreUrls, FALLBACK_IOS_URL, FALLBACK_ANDROID_URL } from "../lib/appConfig.js";
 import Reveal from "./Reveal.jsx";
@@ -110,6 +110,26 @@ export default function DownloadSection() {
             </div>
           </div>
         </Reveal>
+
+        {/* Web CTA */}
+        <div style={{ marginTop: 40 }}>
+          <Reveal>
+            <div className="web-cta-divider"><span>or</span></div>
+            <p className="web-cta-label">Prefer to use it on your computer?</p>
+            <a
+              href="https://user.kungabasics.com/register"
+              className="btn-web-cta"
+              onClick={() => trackEvent("click", "/", "continue_web")}
+            >
+              <Monitor size={18} />
+              Continue with the web
+            </a>
+            <p className="web-cta-signin">
+              Already have an account?{" "}
+              <a href="https://user.kungabasics.com/login">Sign in</a>
+            </p>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
