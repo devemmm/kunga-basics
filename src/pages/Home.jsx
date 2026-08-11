@@ -617,7 +617,7 @@ export default function Home() {
             </div>
             <a
               className="btn btn-primary"
-              href="#download"
+              href="https://user.kungabasics.com/ask-gad"
               onClick={() => trackEvent("click", "/", "askgad_cta")}
             >
               Ask Dr. Gad <ArrowRight size={16} />
