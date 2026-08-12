@@ -12,6 +12,7 @@ import About from "./pages/About.jsx";
 import Location from "./pages/Location.jsx";
 import ResetPassword from "./pages/ResetPassword.jsx";
 import AppRedirect from "./pages/AppRedirect.jsx";
+import Assessment from "./pages/Assessment.jsx";
 import NotFound from "./pages/NotFound.jsx";
 
 // Track a pageview on first load and on every route change.
@@ -48,6 +49,7 @@ export default function App() {
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/support" element={<Support />} />
           <Route path="/location" element={<Location />} />
+          <Route path="/assessment" element={<Assessment />} />
           <Route path="/reset-password" element={<ResetPassword />} />
           <Route path="/app/*" element={<AppRedirect />} />
           <Route path="*" element={<NotFound />} />

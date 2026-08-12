@@ -17,6 +17,7 @@ import {
   Lightbulb,
   Move,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 import { trackEvent } from "../lib/track.js";
 import DownloadSection from "../components/DownloadSection.jsx";
 import Reveal from "../components/Reveal.jsx";
@@ -209,6 +210,42 @@ export default function Home() {
           ],
         }}
       />
+
+      {/* ── Free Assessment Promotion Banner ─────────────────────────────── */}
+      <div style={{
+        background: "linear-gradient(90deg,#0D3D22 0%,#16a34a 60%,#22c55e 100%)",
+        padding: "0",
+        position: "relative",
+        overflow: "hidden",
+      }}>
+        {/* decorative circles */}
+        <div style={{ position: "absolute", top: -30, right: 80, width: 110, height: 110, borderRadius: "50%", background: "rgba(255,255,255,.06)", pointerEvents: "none" }} />
+        <div style={{ position: "absolute", bottom: -20, left: 40, width: 70, height: 70, borderRadius: "50%", background: "rgba(255,255,255,.05)", pointerEvents: "none" }} />
+        <div className="container" style={{ display: "flex", alignItems: "center", gap: 16, flexWrap: "wrap", justifyContent: "space-between", padding: "18px 24px", position: "relative", zIndex: 1 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 14, flex: 1, minWidth: 240 }}>
+            <div style={{ width: 44, height: 44, borderRadius: 12, background: "rgba(255,255,255,.15)", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 22, flexShrink: 0 }}>🎁</div>
+            <div>
+              <div style={{ color: "#fff", fontWeight: 800, fontSize: 15, lineHeight: 1.3 }}>
+                Free Child Development Assessment — Limited Time!
+              </div>
+              <div style={{ color: "rgba(255,255,255,.82)", fontSize: 13, marginTop: 2 }}>
+                Get a personalised development profile for your child, 100% free. No account required.
+              </div>
+            </div>
+          </div>
+          <Link to="/assessment"
+            onClick={() => trackEvent("promo_banner_click", { source: "home_top" })}
+            style={{
+              display: "inline-flex", alignItems: "center", gap: 8, flexShrink: 0,
+              background: "#fff", color: "#14532d", borderRadius: 99,
+              padding: "10px 22px", fontWeight: 800, fontSize: 14, textDecoration: "none",
+              boxShadow: "0 2px 12px rgba(0,0,0,.18)", transition: "transform .15s",
+              whiteSpace: "nowrap",
+            }}>
+            Start Free Assessment →
+          </Link>
+        </div>
+      </div>
 
       {/* ── Hero — Premium Split Layout ──────────────────────────────────── */}
       <section className="kt-hero-v2">
