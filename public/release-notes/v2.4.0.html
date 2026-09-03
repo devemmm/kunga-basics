@@ -1,0 +1,651 @@
+<title>Kunga Basics Release Note</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --green-deep:   #0D3D22;
+    --green-mid:    #1B5E3B;
+    --green-accent: #0db87e;
+    --green-soft:   #d1ead9;
+    --green-bg:     #F6FAF8;
+    --ink:          #192820;
+    --ink2:         #3a4f43;
+    --muted:        #6b8278;
+    --border:       #d1e8dc;
+    --surface:      #ffffff;
+    --amber:        #d97706;
+    --amber-bg:     #fef3c7;
+    --violet:       #7c3aed;
+    --violet-bg:    #ede9fe;
+    --teal-bg:      #d1fae5;
+    --teal-text:    #065f46;
+    --rose-bg:      #fee2e2;
+    --rose-text:    #991b1b;
+    --blue-bg:      #dbeafe;
+    --blue-text:    #1e40af;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --green-bg:   #0e1a13;
+      --surface:    #131f18;
+      --ink:        #e4ede8;
+      --ink2:       #a8bfb0;
+      --muted:      #6b8278;
+      --border:     #1e3326;
+      --green-soft: #1a3328;
+      --amber-bg:   #2d1f00;
+      --violet-bg:  #1e1133;
+      --teal-bg:    #052e1a;
+      --rose-bg:    #2d0a0a;
+      --blue-bg:    #0f1f3d;
+      --teal-text:  #6ee7b7;
+      --rose-text:  #fca5a5;
+      --blue-text:  #93c5fd;
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --green-bg:   #0e1a13;
+    --surface:    #131f18;
+    --ink:        #e4ede8;
+    --ink2:       #a8bfb0;
+    --muted:      #6b8278;
+    --border:     #1e3326;
+    --green-soft: #1a3328;
+    --amber-bg:   #2d1f00;
+    --violet-bg:  #1e1133;
+    --teal-bg:    #052e1a;
+    --rose-bg:    #2d0a0a;
+    --blue-bg:    #0f1f3d;
+    --teal-text:  #6ee7b7;
+    --rose-text:  #fca5a5;
+    --blue-text:  #93c5fd;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--green-bg);
+    color: var(--ink);
+    margin: 0;
+    padding: 32px 16px 64px;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .doc {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: var(--green-deep);
+    border-radius: 14px 14px 0 0;
+    padding: 28px 32px 24px;
+    color: #fff;
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 18px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 36px;
+    height: 36px;
+    border-radius: 9px;
+    background: var(--green-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-family: 'Sora', sans-serif;
+    font-weight: 800;
+    font-size: 17px;
+    color: #fff;
+    letter-spacing: -0.3px;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 1px;
+    letter-spacing: 0.3px;
+  }
+
+  .version-badge {
+    background: var(--green-accent);
+    color: #fff;
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 20px;
+    letter-spacing: 0.2px;
+  }
+
+  .release-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 26px;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1.25;
+    text-wrap: balance;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+  }
+
+  .meta-item strong {
+    color: rgba(255,255,255,0.85);
+    font-weight: 600;
+  }
+
+  /* ── Repo Tags ── */
+  .repo-row {
+    background: var(--green-mid);
+    padding: 12px 32px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+  }
+
+  .repo-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: rgba(255,255,255,0.45);
+    font-weight: 600;
+    margin-right: 4px;
+  }
+
+  .repo-chip {
+    font-size: 11px;
+    font-weight: 600;
+    font-family: 'Sora', sans-serif;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.85);
+  }
+
+  /* ── Summary bar ── */
+  .summary-bar {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    padding: 16px 32px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+
+  .summary-stat {
+    text-align: center;
+  }
+
+  .summary-stat .num {
+    font-family: 'Sora', sans-serif;
+    font-size: 24px;
+    font-weight: 800;
+    color: var(--green-accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .summary-stat .lbl {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    color: var(--muted);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  /* ── Body ── */
+  .body {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: none;
+    border-radius: 0 0 14px 14px;
+    padding: 0 32px 32px;
+  }
+
+  .section {
+    padding-top: 28px;
+  }
+
+  .section + .section {
+    border-top: 1px solid var(--border);
+    margin-top: 24px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-icon {
+    font-size: 17px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    color: var(--ink2);
+  }
+
+  /* ── Change item ── */
+  .change {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px 14px;
+    align-items: start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .change:last-child { border-bottom: none; }
+
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Sora', sans-serif;
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+    letter-spacing: 0.3px;
+    margin-top: 1px;
+  }
+
+  .tag-feat   { background: var(--teal-bg);   color: var(--teal-text); }
+  .tag-fix    { background: var(--rose-bg);    color: var(--rose-text); }
+  .tag-update { background: var(--blue-bg);    color: var(--blue-text); }
+  .tag-deploy { background: var(--amber-bg);   color: var(--amber); }
+
+  .change-title {
+    font-weight: 600;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin-bottom: 3px;
+    line-height: 1.4;
+  }
+
+  .change-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .change-desc code {
+    font-size: 11.5px;
+    background: var(--green-bg);
+    border: 1px solid var(--border);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--green-accent);
+    font-family: 'Menlo', 'Consolas', monospace;
+  }
+
+  /* ── Affected repos ── */
+  .affected {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 6px;
+  }
+
+  .repo-tag {
+    font-size: 10px;
+    font-weight: 600;
+    font-family: 'Sora', sans-serif;
+    padding: 2px 7px;
+    border-radius: 5px;
+    background: var(--green-soft);
+    color: var(--green-mid);
+    letter-spacing: 0.2px;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .repo-tag {
+      background: #1a3328;
+      color: #6ee7b7;
+    }
+  }
+
+  :root[data-theme="dark"] .repo-tag {
+    background: #1a3328;
+    color: #6ee7b7;
+  }
+
+  /* ── Deploy note ── */
+  .deploy-note {
+    margin-top: 28px;
+    padding: 16px 20px;
+    background: var(--amber-bg);
+    border: 1px solid #fcd34d;
+    border-radius: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .deploy-note-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+
+  .deploy-note-title {
+    font-family: 'Sora', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--amber);
+    margin-bottom: 5px;
+  }
+
+  .deploy-note-body {
+    font-size: 12.5px;
+    color: var(--ink2);
+    line-height: 1.55;
+  }
+
+  .deploy-note-body code {
+    font-size: 11.5px;
+    background: rgba(0,0,0,0.06);
+    padding: 1px 5px;
+    border-radius: 4px;
+    font-family: 'Menlo', 'Consolas', monospace;
+    color: var(--amber);
+  }
+
+  /* ── Footer ── */
+  .footer {
+    margin-top: 24px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 540px) {
+    .header, .repo-row, .summary-bar, .body { padding-left: 20px; padding-right: 20px; }
+    .release-title { font-size: 21px; }
+    .summary-stat .num { font-size: 20px; }
+  }
+</style>
+
+<div class="doc">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-top">
+      <div class="brand">
+        <div class="brand-mark">🌱</div>
+        <div>
+          <div class="brand-name">Kunga Basics</div>
+          <div class="brand-sub">Platform Release Notes</div>
+        </div>
+      </div>
+      <div class="version-badge">v2.4.0</div>
+    </div>
+
+    <div class="release-title">Email Verification, Book Download Tracking &amp; UX Improvements</div>
+
+    <div class="meta-row">
+      <div class="meta-item"><strong>Date</strong> &nbsp;September 3, 2026</div>
+      <div class="meta-item"><strong>Branch</strong> &nbsp;dev</div>
+      <div class="meta-item"><strong>Prepared by</strong> &nbsp;Engineering Team</div>
+    </div>
+  </div>
+
+  <!-- Repo row -->
+  <div class="repo-row">
+    <span class="repo-label">Repos updated</span>
+    <span class="repo-chip">kunga-api</span>
+    <span class="repo-chip">kunga-user-portal</span>
+    <span class="repo-chip">kunga-mobile-app</span>
+    <span class="repo-chip">kunga-admin-portal</span>
+  </div>
+
+  <!-- Summary bar -->
+  <div class="summary-bar">
+    <div class="summary-stat">
+      <div class="num">4</div>
+      <div class="lbl">Repos touched</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num">3</div>
+      <div class="lbl">New features</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num">4</div>
+      <div class="lbl">Bug fixes</div>
+    </div>
+    <div class="summary-stat">
+      <div class="num">1</div>
+      <div class="lbl">DB migration</div>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <!-- Auth -->
+    <div class="section">
+      <div class="section-head">
+        <span class="section-icon">🔐</span>
+        <span class="section-title">Authentication</span>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-feat">FEAT</span>
+        <div>
+          <div class="change-title">Email verified before account creation</div>
+          <div class="change-desc">
+            The registration flow was redesigned so a 6-digit OTP is sent to the user's email address <em>before</em> any account is created. The account is only written to the database after the user submits the correct code. This eliminates unverified or partial accounts and sets <code>emailVerified = true</code> at the moment of creation.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-api</span>
+            <span class="repo-tag">kunga-user-portal</span>
+            <span class="repo-tag">kunga-mobile-app</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-feat">FEAT</span>
+        <div>
+          <div class="change-title">New endpoints: send &amp; resend registration OTP</div>
+          <div class="change-desc">
+            Two new API routes were added: <code>POST /auth/send-registration-otp</code> (step 1 — sends OTP, no account created) and <code>POST /auth/resend-registration-otp</code>. OTPs are stored in Redis with a 10-minute TTL and a 3-attempt lockout. The <code>/auth/register</code> endpoint now requires the <code>otp</code> field.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-api</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-fix">FIX</span>
+        <div>
+          <div class="change-title">OTP "Create Account" button unresponsive on iOS</div>
+          <div class="change-desc">
+            On iOS, tapping the button while the keyboard was open consumed the first tap to dismiss the keyboard instead of triggering the action. Fixed by removing the <code>disabled</code> prop dependency on code completeness — the button stays enabled, and validation happens inside the handler.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-mobile-app</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-fix">FIX</span>
+        <div>
+          <div class="change-title">OTP verify button unresponsive on web portal</div>
+          <div class="change-desc">
+            The <code>PrimaryBtn</code> component did not accept or forward the <code>onClick</code> prop, so the button rendered but never fired. The prop is now explicitly forwarded to the underlying <code>&lt;button&gt;</code> element.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-user-portal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-feat">FEAT</span>
+        <div>
+          <div class="change-title">OTP auto-submits when all 6 digits are entered</div>
+          <div class="change-desc">
+            Both the web portal and mobile app now automatically trigger verification as soon as the sixth digit is typed or pasted. A <code>verifyRef</code> pattern is used to avoid stale closure bugs on auto-submit.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-user-portal</span>
+            <span class="repo-tag">kunga-mobile-app</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-fix">FIX</span>
+        <div>
+          <div class="change-title">Google Sign-In button missing on production (web portal)</div>
+          <div class="change-desc">
+            <code>VITE_GOOGLE_CLIENT_ID</code> was not being passed as a Docker build argument, so Vite baked an empty string into the bundle. The Dockerfile and <code>docker-compose.yml</code> were updated to pass it correctly at build time.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-user-portal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tracking -->
+    <div class="section">
+      <div class="section-head">
+        <span class="section-icon">📥</span>
+        <span class="section-title">Book Download Tracking</span>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-feat">FEAT</span>
+        <div>
+          <div class="change-title">Track who downloads the free book and when</div>
+          <div class="change-desc">
+            Every click of the "Download Free Book" button now records the user, timestamp, platform (web or mobile), and IP address in a new <code>book_downloads</code> database table. Tracking is fire-and-forget — it never blocks the actual download.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-api</span>
+            <span class="repo-tag">kunga-user-portal</span>
+            <span class="repo-tag">kunga-mobile-app</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-feat">FEAT</span>
+        <div>
+          <div class="change-title">Book download statistics in Admin → Analytics</div>
+          <div class="change-desc">
+            A new section was added at the bottom of the Analytics page showing: total downloads, unique downloaders, web vs. mobile breakdown, and a full paginated table of every download with the user's name, email, platform badge, and exact timestamp.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-admin-portal</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-deploy">DEPLOY</span>
+        <div>
+          <div class="change-title">DB migration included in deploy script</div>
+          <div class="change-desc">
+            <code>deploy.sh</code> now runs a <code>CREATE TABLE IF NOT EXISTS</code> step automatically before the RBAC seed, so no manual SQL is needed. Running <code>./deploy.sh</code> on the server is all that is required.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-api</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Plans -->
+    <div class="section">
+      <div class="section-head">
+        <span class="section-icon">⭐</span>
+        <span class="section-title">Subscription Plans</span>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-update">UPDATE</span>
+        <div>
+          <div class="change-title">Clearer Gold vs. Premium differentiation</div>
+          <div class="change-desc">
+            The Available Plans section was updated to make the value difference obvious to users. Gold now lists 6 features including Ask Dr. Gad (2 questions/mo). Premium lists everything in Gold plus unlimited expert questions, unlimited child assessments, priority support (24h response), downloadable milestone reports, and early access to new modules. A <strong>"⭐ Most Popular"</strong> badge was added to the Premium card to guide users toward it.
+          </div>
+          <div class="affected">
+            <span class="repo-tag">kunga-user-portal</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Data cleanup -->
+    <div class="section">
+      <div class="section-head">
+        <span class="section-icon">🧹</span>
+        <span class="section-title">Data</span>
+      </div>
+
+      <div class="change">
+        <span class="tag tag-fix">FIX</span>
+        <div>
+          <div class="change-title">Test accounts removed from production database</div>
+          <div class="change-desc">
+            Two test accounts used during development — <code>dummyemail@gmail.com</code> and <code>verficationemail@test.com</code> — were permanently deleted from the production database along with all associated records (child profiles, preferences, sessions).
+          </div>
+          <div class="affected">
+            <span class="repo-tag">production DB</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /body -->
+
+  <div class="footer">
+    Kunga Basics Engineering &nbsp;·&nbsp; All changes committed to branch <strong>dev</strong> &nbsp;·&nbsp; September 3, 2026
+  </div>
+
+</div>
