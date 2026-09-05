@@ -23,10 +23,10 @@ The app is intended for parents and caregivers supporting children with developm
     title: "3. Subscription & Payments",
     body: `Access to premium features requires a paid subscription:
 
-• Monthly plan: $14.00/month
-• Annual plan: $140.00/year
+• Gold plan: $299.99/month — includes core video modules, daily routine planner, journal, and Ask Dr. Gad (2 expert questions/month)
+• Premium plan: $349.99/month — includes everything in Gold plus unlimited Ask Dr. Gad questions, unlimited child assessments, priority support, downloadable milestone reports, and early access to new modules
 
-Subscriptions are processed securely via Flutterwave. By subscribing, you authorise us to charge your payment method on a recurring basis.
+Subscriptions are processed securely via Apple In-App Purchase (iOS) or Google Play Billing (Android). By subscribing, you authorise us to charge your payment method on a recurring basis.
 
 You may cancel your subscription at any time from Settings. Cancellation takes effect at the end of the current billing period. We do not provide refunds for partial periods.
 
